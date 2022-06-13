@@ -1,0 +1,32 @@
+{
+  "input_data_path":"data/gtsrb.json",
+  "show_outcome_details": false,
+  "customized_metric_score":[
+    {
+      "name":"CS01",
+      "path": "customized_metrics.Metrics",
+      "scoreCalculatorParam":{
+        "showDetails": true,
+        "alpha": 1,
+        "beta": 1,
+        "gamma": 1
+      }
+    }
+  ],
+  "solver":{
+    "name": "PulP",
+    "path": "Solvers.ConstraintHandler",
+    "constraints":[
+      {
+        "constraint": "LpMaximize"
+      },
+      {
+        "constraint": "max",
+        "metric_name": "CS01"
+      }
+    ]
+  },
+  "output":{
+    "output_file_path": "outputs/gtsrb.json"
+  }
+}
