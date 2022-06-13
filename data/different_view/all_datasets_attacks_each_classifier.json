@@ -58,8 +58,7 @@
                     "defense_params": {
                         "dropout_rate": 0.5,
                         "loss_func": "MSE",
-                        "optimizer": "adam",
-                        "start_neurons": 28
+                        "optimizer": "adam"
                     },
                     "defender_performance": {
                         "natural_f1-score": 93,
@@ -246,8 +245,7 @@
               "defense_params": {
                   "dropout_rate": 0.5,
                   "loss_func": "MSE",
-                  "optimizer": "adam",
-                  "start_neurons": 28
+                  "optimizer": "adam"
               },
               "defender_performance": {
                   "natural_f1-score": 93,
@@ -398,8 +396,7 @@
                     "defense_params": {
                         "dropout_rate": 0.5,
                         "loss_func": "MSE",
-                        "optimizer": "adam",
-                        "start_neurons": 28
+                        "optimizer": "adam"
                     },
                     "defender_performance": {
                         "natural_f1-score": 87,
@@ -586,8 +583,7 @@
               "defense_params": {
                   "dropout_rate": 0.5,
                   "loss_func": "MSE",
-                  "optimizer": "adam",
-                  "start_neurons": 28
+                  "optimizer": "adam"
               },
               "defender_performance": {
                   "natural_f1-score": 87,
@@ -738,8 +734,7 @@
                     "defense_params": {
                         "dropout_rate": 0.5,
                         "loss_func": "MSE",
-                        "optimizer": "adam",
-                        "start_neurons": 28
+                        "optimizer": "adam"
                     },
                     "defender_performance": {
                         "natural_f1-score": 86,
@@ -926,8 +921,7 @@
               "defense_params": {
                   "dropout_rate": 0.5,
                   "loss_func": "MSE",
-                  "optimizer": "adam",
-                  "start_neurons": 28
+                  "optimizer": "adam"
               },
               "defender_performance": {
                   "natural_f1-score": 86,

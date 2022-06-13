@@ -58,8 +58,7 @@
                 "defense_params": {
                     "dropout_rate": 0.5,
                     "loss_func": "MSE",
-                    "optimizer": "adam",
-                    "start_neurons": 28
+                    "optimizer": "adam"
                 },
                 "defender_performance": {
                     "natural_f1-score": 89,
@@ -244,8 +243,7 @@
               "defense_params": {
                   "dropout_rate": 0.5,
                   "loss_func": "MSE",
-                  "optimizer": "adam",
-                  "start_neurons": 28
+                  "optimizer": "adam"
               },
               "defender_performance": {
                   "natural_f1-score": 89,
@@ -429,8 +427,7 @@
                 "defense_params": {
                     "dropout_rate": 0.5,
                     "loss_func": "MSE",
-                    "optimizer": "adam",
-                    "start_neurons": 28
+                    "optimizer": "adam"
                 },
                 "defender_performance": {
                     "natural_f1-score": 89,
@@ -617,8 +614,7 @@
                 "defense_params": {
                     "dropout_rate": 0.5,
                     "loss_func": "MSE",
-                    "optimizer": "adam",
-                    "start_neurons": 28
+                    "optimizer": "adam"
                 },
                 "defender_performance": {
                     "natural_f1-score": 89,
@@ -761,8 +757,7 @@
                 "defense_params": {
                     "dropout_rate": 0.5,
                     "loss_func": "MSE",
-                    "optimizer": "adam",
-                    "start_neurons": 28
+                    "optimizer": "adam"
                 },
                 "defender_performance": {
                     "natural_f1-score": 89,
@@ -904,8 +899,7 @@
                 "defense_params": {
                     "dropout_rate": 0.5,
                     "loss_func": "MSE",
-                    "optimizer": "adam",
-                    "start_neurons": 28
+                    "optimizer": "adam"
                 },
                 "defender_performance": {
                     "natural_f1-score": 89,
