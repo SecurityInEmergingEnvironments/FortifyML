@@ -1,9 +1,8 @@
 import json
 import os
 
-from kivy.app import App
 from kivy.lang import Builder
-from kivy.properties import ObjectProperty
+from kivy.properties import ObjectProperty, VariableListProperty
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.button import Button
 from kivy.uix.dropdown import DropDown
@@ -12,8 +11,13 @@ from kivy.uix.gridlayout import GridLayout
 from kivy.uix.label import Label
 from kivy.uix.popup import Popup
 from kivy.uix.screenmanager import ScreenManager, Screen
+from kivy.uix.scrollview import ScrollView
 from kivy.uix.spinner import Spinner
 from kivy.uix.textinput import TextInput
+from kivymd.app import MDApp
+from kivymd.uix.boxlayout import MDBoxLayout
+from kivymd.uix.expansionpanel import MDExpansionPanel, MDExpansionPanelTwoLine, MDExpansionPanelOneLine
+from kivymd.uix.label import MDLabel
 
 from Driver import Driver
 
@@ -150,6 +154,28 @@ class WindowManager(ScreenManager):
 # FUTURE WORK: create a settings page for the UI where the user can customize the UI, including
 # changing the color of the UI (light mode, dark mode, etc.), font color, font size, default values,
 # starting number of parameters, starting number of constraints, etc.
+
+class RegularWindow(Screen):
+    def __init__(self, **kwargs):
+        super(Screen, self).__init__(**kwargs)
+        self.defenses_list = {
+            "Evasion Attacks - Fastest": "fastest",
+            "Evasion Attacks - Average": "average",
+            "Evasion Attacks - Slowest": "slowest"
+        }
+        self.hardware_list = {
+            "Nvidia RTX 3080 Ti": "3080ti",
+            "Nvidia RTX 6000": "rtx6000"
+        }
+
+    # generate the output based on the options selected
+    def ui_generate_button(self, application_id, defense_id, constraints_id, hardware_id):
+        settings_filename = f"UI_data/{application_id}_{self.defenses_list[defense_id]}_{constraints_id.lower()}_{self.hardware_list[hardware_id]}.json"
+        driver = Driver(settingPath=settings_filename)
+        driver.drive()
+
+        self.parent.ids.recommendations_window.extract_recommendations(settings_filename)
+
 class MainWindow(Screen):
     _popup = None
 
@@ -986,6 +1012,8 @@ class AddCustomConstraints(BoxLayout):
 
             self.ids.custom_constraint_text.text = " Added '" + self.ids.custom_constraint_input.text + "'"
 
+class RecommendationsExpansion(MDBoxLayout):
+    pass
 
 class RecommendationsWindow(Screen):
     # extract the recommendations into dictionary form from the given settings file
@@ -1008,22 +1036,42 @@ class RecommendationsWindow(Screen):
         # a recommendation container has a button to expand/collapse each section as well as a label to display
         # the content
         for dataset in output_dictionary["recommendation_result"]:
-            # each level of the loop is creating a container in the given parent container with the given text
-            dataset_rc = self.add_recommendation_container(self.ids.recommendations_scrollview, " Dataset: " + dataset)
+            dataset_rc = self.add_recommendation_container(self.ids.recommendations_scrollview,
+                                                           f"Dataset : {dataset}")
 
             for model_classifier in output_dictionary["recommendation_result"][dataset]:
-                model_classifier_rc = self.add_recommendation_container(dataset_rc, "    Model Classifier: " + model_classifier)
+                classifier_panel = self.add_recommendation_container(dataset_rc,
+                                                                     f"Model Classifier : {model_classifier}")
 
                 for threat_model in output_dictionary["recommendation_result"][dataset][model_classifier]:
-                    threat_model_rc = self.add_recommendation_container(model_classifier_rc, "        Threat Model: " + threat_model)
+                    threat_panel = self.add_recommendation_container(classifier_panel,
+                                                                     f"Threat Model : {threat_model}")
 
                     for attack in output_dictionary["recommendation_result"][dataset][model_classifier][threat_model]:
-                        attack_rc = self.add_recommendation_container(threat_model_rc, "            Attacker Model: " + attack)
+                        attack_panel = MDExpansionPanel(content=RecommendationsExpansion(),
+                                                        panel_cls=MDExpansionPanelOneLine(text=f"Attack : {attack}"))
 
-                        solver_status = RecommendationLabel(text="                        Solver Status: " + output_dictionary["recommendation_result"][dataset][model_classifier][threat_model][attack]["solver_status"])
-                        recommended_defender = RecommendationLabel(text="                        Recommended Defender: " +output_dictionary["recommendation_result"][dataset][model_classifier][threat_model][attack]["recommendation"])
-                        attack_rc.ids.sub_layer_container.add_widget(solver_status)
-                        attack_rc.ids.sub_layer_container.add_widget(recommended_defender)
+                        defense_box = MDBoxLayout(padding=[20, 0, 0, 0], adaptive_height=True)
+                        defense_panel = MDExpansionPanel(content=RecommendationsExpansion(),
+                                                         panel_cls=MDExpansionPanelOneLine(text=f"Recommended Defender : {output_dictionary['recommendation_result'][dataset][model_classifier][threat_model][attack]['recommendation']}"))
+
+                        defense_box.add_widget(defense_panel)
+                        threat_panel.ids.sub_layer_container.add_widget(attack_panel)
+                        threat_panel.ids.sub_layer_container.add_widget(defense_box)
+
+        #     for model_classifier in output_dictionary["recommendation_result"][dataset]:
+        #         model_classifier_rc = self.add_recommendation_container(dataset_rc, "    Model Classifier: " + model_classifier)
+        #
+        #         for threat_model in output_dictionary["recommendation_result"][dataset][model_classifier]:
+        #             threat_model_rc = self.add_recommendation_container(model_classifier_rc, "        Threat Model: " + threat_model)
+        #
+        #             for attack in output_dictionary["recommendation_result"][dataset][model_classifier][threat_model]:
+        #                 attack_rc = self.add_recommendation_container(threat_model_rc, "            Attacker Model: " + attack)
+        #
+        #                 solver_status = RecommendationLabel(text="                        Solver Status: " + output_dictionary["recommendation_result"][dataset][model_classifier][threat_model][attack]["solver_status"])
+        #                 recommended_defender = RecommendationLabel(text="                        Recommended Defender: " +output_dictionary["recommendation_result"][dataset][model_classifier][threat_model][attack]["recommendation"])
+        #                 attack_rc.ids.sub_layer_container.add_widget(solver_status)
+        #                 attack_rc.ids.sub_layer_container.add_widget(recommended_defender)
 
     # creates a container in the given parent container with the given text and returns the created container
     def add_recommendation_container(self, parent_container, layer_label_text):
@@ -1031,6 +1079,7 @@ class RecommendationsWindow(Screen):
         rc.ids.layer_label.text = layer_label_text
         parent_container.ids.sub_layer_container.add_widget(rc)
         return rc
+
 
 
 # contains an expand/collapse button, a label for the layer (dataset or model classifier or threat model etc.)
@@ -1177,11 +1226,15 @@ class SaveTextInput(TextInput):
         return super().keyboard_on_key_down(window, keycode, text, modifiers)
 
 
-_kv = Builder.load_file("kivy.kv")
 
 
-class RecommenderTool(App):
+
+class RecommenderTool(MDApp):
     def build(self):
+        self.theme_cls.primary_palette = "Orange"
+        self.theme_cls.theme_style = "Dark"
+        self.theme_cls.primary_hue = "200"
+        _kv = Builder.load_file("kivy.kv")
         return _kv
 
 

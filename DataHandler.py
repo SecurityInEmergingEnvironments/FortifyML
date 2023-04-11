@@ -127,7 +127,7 @@ class InputDataHandler:
   This private method build the defender dictionary including the defender's name and its performance
   @param defenderListForCurrentAttack list of defender names
   @param scoreDictionary a dictionary where key is name of a score and value is the score
-  @return dictionary where key is a namee of a defender and value is its performance object
+  @return dictionary where key is a name of a defender and value is its performance object
   """
   def _buildDefenderDict(self, defenderListForCurrentAttack, scoreDictionary):
     defenderDict = {}

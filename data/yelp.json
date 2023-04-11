@@ -1,0 +1,62 @@
+{
+  "context": {
+    "GPU": "NVIDIA_RTX-6000"
+  },
+  "data": {
+    "yelp": {
+      "bert": {
+        "baseline_performance": {
+          "natural_accuracy": 95.28,
+          "inference_elapsed_time_per_1000_in_s": 4.43
+        },
+        "grey-box_setting": {
+          "pwws": {
+            "type_of_attack": "evasion",
+            "attackParams": {
+              "batch_size": 32
+            },
+            "attacker_performance": {
+              "robust_accuracy": 13.7
+            },
+            "defenders": [
+              {
+                "nameOfDefender": "TMD",
+                "type": "preprocessor",
+                "defense_params": {
+                },
+                "defender_performance": {
+                  "robust_accuracy": 36.8,
+                  "natural_accuracy": 95.24,
+                  "inference_elapsed_time_per_1000_in_s": 5
+                }
+              }
+            ]
+          },
+          "textfooler": {
+            "type_of_attack": "evasion",
+            "attackParams": {
+              "batch_size": 32
+            },
+            "attacker_performance": {
+              "robust_accuracy": 10.5
+            },
+            "defenders": [
+              {
+                "nameOfDefender": "TMD",
+                "type": "preprocessor",
+                "defense_params": {
+
+                },
+                "defender_performance": {
+                  "robust_accuracy": 40.9,
+                  "natural_accuracy": 95.24,
+                  "inference_elapsed_time_per_1000_in_s": 5
+                }
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}

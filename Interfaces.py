@@ -25,3 +25,4 @@ class CustomizedMetricScoreInterface:
   
   def getScore(self, scoreDictionary):
     raise Exception("CustomizedMetricScoreInterface.getScore() not implemented yet")
+

@@ -1,0 +1,148 @@
+{
+  "context": {
+    "GPU": "NVIDIA_RTX-6000"
+  },
+  "data": {
+    "imdb": {
+      "bert": {
+        "baseline_performance": {
+          "natural_accuracy": 92.15,
+          "inference_elapsed_time_per_1000_in_s": 4.43
+        },
+        "grey-box_setting": {
+          "pwws": {
+            "type_of_attack": "evasion",
+            "attackParams": {
+              "batch_size": 32
+            },
+            "attacker_performance": {
+              "robust_accuracy": 6.5
+            },
+            "defenders": [
+              {
+                "nameOfDefender": "TMD",
+                "type": "preprocessor",
+                "defense_params": {},
+                "defender_performance": {
+                  "natural_accuracy": 92.17,
+                  "robust_accuracy": 38.7,
+                  "inference_elapsed_time_per_1000_in_s": 5
+                }
+              },
+              {
+                "nameOfDefender": "ASCC",
+                "type": "preprocessor",
+                "defense_params": {},
+                "defender_performance": {
+                  "natural_accuracy": 92.2,
+                  "robust_accuracy": 77.5,
+                  "inference_elapsed_time_per_1000_in_s": 5
+                }
+              }
+            ]
+          },
+          "textfooler": {
+            "type_of_attack": "evasion",
+            "attackParams": {
+              "batch_size": 32
+            },
+            "attacker_performance": {
+              "robust_accuracy": 2.3
+            },
+            "defenders": [
+              {
+                "nameOfDefender": "TMD",
+                "type": "preprocessor",
+                "defense_params": {},
+                "defender_performance": {
+                  "natural_accuracy": 92.17,
+                  "robust_accuracy": 44.2,
+                  "inference_elapsed_time_per_1000_in_s": 5
+                }
+              }
+            ]
+          }
+        }
+      },
+      "robert": {
+        "baseline_performance": {
+          "natural_accuracy": 93.24,
+          "inference_elapsed_time_per_1000_in_s": 4.43
+        },
+        "grey-box_setting": {
+          "textfooler": {
+            "type_of_attack": "evasion",
+            "attackParams": {
+              "batch_size": 32
+            },
+            "attacker_performance": {
+              "robust_accuracy": 1.0
+            },
+            "defenders": [
+              {
+                "nameOfDefender": "TMD",
+                "type": "preprocessor",
+                "defense_params": {},
+                "defender_performance": {
+                  "natural_accuracy": 93.26,
+                  "robust_accuracy": 66.8,
+                  "inference_elapsed_time_per_1000_in_s": 5
+                }
+              }
+            ]
+          }
+        }
+      },
+      "lstm": {
+        "baseline_performance": {
+          "natural_accuracy": 88.5,
+          "inference_elapsed_time_per_1000_in_s": 4.43
+        },
+        "grey-box_setting": {
+          "textfooler": {
+            "type_of_attack": "evasion",
+            "attackParams": {
+              "batch_size": 32
+            },
+            "attacker_performance": {
+              "robust_accuracy": 1.0
+            },
+            "defenders": [
+              {
+                "nameOfDefender": "TMD",
+                "type": "preprocessor",
+                "defense_params": {},
+                "defender_performance": {
+                  "natural_accuracy": 93.26,
+                  "robust_accuracy": 66.8,
+                  "inference_elapsed_time_per_1000_in_s": 5
+                }
+              }
+            ]
+          },
+          "pwws": {
+            "type_of_attack": "evasion",
+            "attackParams": {
+              "batch_size": 32
+            },
+            "attacker_performance": {
+              "robust_accuracy": 1.0
+            },
+            "defenders": [
+              {
+                "nameOfDefender": "ASCC",
+                "type": "preprocessor",
+                "defense_params": {},
+                "defender_performance": {
+                  "natural_accuracy": 88.5,
+                  "robust_accuracy": 82.5,
+                  "inference_elapsed_time_per_1000_in_s": 5
+                }
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}

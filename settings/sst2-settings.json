@@ -1,0 +1,36 @@
+{
+  "input_data_path": "data/sst_2.json",
+  "customized_metric_score": [
+    {
+      "name": "CNS01",
+      "path": "customized_metrics.NLP_Metrics",
+      "scoreCalculatorParam": {
+        "showDetails": true,
+        "gamma": 1.0,
+        "beta": 1.0,
+        "alpha": 1.0
+      }
+    }
+  ],
+  "solver": {
+    "constraints": [
+      {
+        "constraint": "LpMaximize"
+      },
+      {
+        "constraint": "max",
+        "metric_name": "CNS01"
+      },
+      {
+        "constraint": ">=",
+        "constraint_value": 80,
+        "metric_name": "natural_accuracy"
+      }
+    ],
+    "name": "PulP",
+    "path": "Solvers.ConstraintHandler"
+  },
+  "output": {
+    "output_file_path": "sst_2_output.json"
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "context": {
+    "GPU": "NVIDIA_RTX-6000"
+  },
+  "data": {
+    "sst_2": {
+      "bert": {
+        "baseline_performance": {
+          "natural_accuracy": 91.9,
+          "inference_elapsed_time_per_1000_in_s": 4.43
+        },
+        "grey-box_setting": {
+          "textfooler": {
+            "type_of_attack": "evasion",
+            "attackParams": {
+              "batch_size": 32
+            },
+            "attacker_performance": {
+              "robust_accuracy": 80.5
+            },
+            "defenders": [
+              {
+                "nameOfDefender": "DAT",
+                "type": "preprocessor",
+                "defense_params": {
+                },
+                "defender_performance": {
+                  "natural_accuracy": 91.9,
+                  "robust_accuracy": 80.5,
+                  "inference_elapsed_time_per_1000_in_s": 5
+                }
+              },
+              {
+                "nameOfDefender": "ADFAR",
+                "type": "preprocessor",
+                "defense_params": {
+                },
+                "defender_performance": {
+                  "natural_accuracy": 92.4,
+                  "robust_accuracy": 75.6,
+                  "inference_elapsed_time_per_1000_in_s": 5
+                }
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}
