@@ -63,7 +63,6 @@ class PulP(ConstraintSolverInterface):
     elif op == 'LpMinimize':
       self.numberOfMinConditionsLimit = 1
       return LpProblem(problem_statement, LpMinimize)
-    
     elif op == 'max' or op == 'min':
       if op == 'max':
         if self.numberOfMaxConditionsLimit == self.numberOfCurrentMaxConditions:

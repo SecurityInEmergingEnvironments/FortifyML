@@ -2,8 +2,8 @@
   "input_data_path": "data/imdb.json",
   "customized_metric_score": [
     {
-      "name": "CNS01",
-      "path": "customized_metrics.NLP_Metrics",
+      "name": "CNS01_F1_Score",
+      "path": "customized_metrics.NLP_metrics",
       "scoreCalculatorParam": {
         "showDetails": true,
         "gamma": 1.0,
@@ -19,18 +19,18 @@
       },
       {
         "constraint": "max",
-        "metric_name": "CNS01"
+        "metric_name": "CNS01_F1_Score"
       },
       {
         "constraint": ">=",
         "constraint_value": 80,
-        "metric_name": "natural_accuracy"
+        "metric_name": "natural_f1-score"
       }
     ],
     "name": "PulP",
     "path": "Solvers.ConstraintHandler"
   },
   "output": {
-    "output_file_path": "imdb_output.json"
+    "output_file_path": "outputs/imdb_output.json"
   }
 }

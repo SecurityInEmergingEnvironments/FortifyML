@@ -20,6 +20,16 @@ WindowManager:
     background_color: color_button if self.state == 'down' else color_button_pressed
     color: color_font
 
+<WarningPopup>:
+    id: warning_popup
+    Label:
+        text: "For Image, there is no analysis performed for accuracy. Please select time as a constraint.
+               Please press ESC to continue."
+        font_size: "20dp"
+        size_hint: 0.6, 0.2
+        pos_hint: {"x":0.2, "top":1}
+        color: color_font
+
 <RegularWindow>:
     name: "regular_window"
     id: regular_window
@@ -59,7 +69,7 @@ WindowManager:
                 id: application_id
                 text: "Application"
                 #background_color : 1, 0, 1, 1
-                values: ["Image", "NLP", "Malware"]
+                values: ["Image", "NLP"]
                 background_color: color_button if self.state == 'normal' else color_button_pressed
                 option_cls: Factory.get('sp')
                 on_text:
@@ -79,7 +89,7 @@ WindowManager:
             Spinner:
                 id: constraints_id
                 text: "Constraints"
-                values: ["Time"]
+                values: ["Time", "Accuracy"]
                 background_color: color_button if self.state == 'normal' else color_button_pressed
                 option_cls: Factory.get('sp')
 
@@ -95,8 +105,6 @@ WindowManager:
         Button:
             text: "Generate Recommendations"
             on_release:
-                app.root.transition.direction = "left"
-                app.root.current = "recommendations_window"
                 root.parent.parent.ui_generate_button(application_id.text, defense_id.text, constraints_id.text, hardware_id.text)
 
 
@@ -116,7 +124,7 @@ WindowManager:
                 app.root.transition.direction = "right"
 
         Label:
-            text: "Recommender Tool v1.0"
+            text: "FortifyML: Machine Learning Security Recommender  v1.0"
             font_size: "20dp"
             size_hint: 1, .2
 
@@ -956,6 +964,7 @@ WindowManager:
 
         Label:
             text: "Recommendations"
+            font_size: "30dp"
             size_hint: 1, .2
 
         RecommendationsScrollView:
@@ -974,10 +983,12 @@ WindowManager:
         padding: [20,0,0,0]
 
         Label:
-            text: "Do Something!"
-            text_size: self.size
-            halign: 'left'
-            valign: 'middle'
+            id: recommendations_reference_link
+            text_size: (self.width, None)
+
+        Label:
+            id: recommendations_description
+            text_size: (self.width, None)
 
 <RecommendationsMenuBarBoxLayout@BoxLayout>:
     size_hint: 1, .2
@@ -989,6 +1000,7 @@ WindowManager:
             on_release:
                 app.root.current = "main_window"
                 app.root.transition.direction = "right"
+                app.clear_output
 
         Button:
             text: "Close"
@@ -1021,6 +1033,7 @@ WindowManager:
         RecommendationLabel:
             id: layer_label
             text: "layer default"
+            color: color_font
 
     BoxLayout:
         id: sub_layer_container

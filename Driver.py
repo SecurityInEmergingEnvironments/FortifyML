@@ -9,7 +9,7 @@ class Driver:
   def __init__(self, settingPath = None):
     self.settingPath = settingPath
   
-  def drive(self):
+  def drive(self, defense_id, hardware_id):
     setting = {}
     # loading the user setting JSON file
     with open(self.settingPath, 'r') as fp:
@@ -23,7 +23,7 @@ class Driver:
     recommendation_result = InputDataHandler(
       settingKwargs = setting,
       scoreCalculatorFuncDict = customizedScoresDict
-    ).handle(jsonFilePath = setting['input_data_path'])
+    ).handle(jsonFilePath = setting['input_data_path'], defenseId=defense_id, hardwareId=hardware_id)
 
     # output
     outputHandler = OutputHandler(

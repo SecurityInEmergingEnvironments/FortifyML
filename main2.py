@@ -11,12 +11,11 @@ from kivy.uix.gridlayout import GridLayout
 from kivy.uix.label import Label
 from kivy.uix.popup import Popup
 from kivy.uix.screenmanager import ScreenManager, Screen
-from kivy.uix.scrollview import ScrollView
 from kivy.uix.spinner import Spinner
 from kivy.uix.textinput import TextInput
 from kivymd.app import MDApp
 from kivymd.uix.boxlayout import MDBoxLayout
-from kivymd.uix.expansionpanel import MDExpansionPanel, MDExpansionPanelTwoLine, MDExpansionPanelOneLine
+from kivymd.uix.expansionpanel import MDExpansionPanel, MDExpansionPanelOneLine
 from kivymd.uix.label import MDLabel
 
 from Driver import Driver
@@ -43,7 +42,8 @@ TEST_SUGGESTIONS = [
 MODEL_PERFORMANCE_SUGGESTIONS = ['natural_accuracy', 'natural_precision', 'natural_recall', 'natural_f1-score',
                                  'inference_elapsed_time_per_1000_in_s']
 
-ATTACKER_PERFORMANCE_SUGGESTIONS = ['robust_accuracy', 'robust_precision', 'robust_recall', 'robust_f1-score']
+ATTACKER_PERFORMANCE_SUGGESTIONS = ['robust_accuracy', 'robust_precision', 'robust_recall', 'robust_f1-score',
+                                    'adv_example_generated_in_s_2080', 'adv_example_generated_in_s_6000']
 
 DEFENDER_PERFORMANCE_SUGGESTIONS = ['natural_accuracy', 'natural_precision', 'natural_recall', 'natural_f1-score',
                                     'robust_accuracy', 'robust_precision', 'robust_recall', 'robust_f1-score',
@@ -146,6 +146,13 @@ def show_save_explorer(widget, hint_text):
     widget._popup.open()
     widget._popup.content.ids.text_input.focus = True
 
+def show_popup():
+    content = WarningPopup()
+    popupWindow = Popup(title="Warning", content=content, size_hint=(0.9,0.9))
+    popupWindow.open()
+
+class WarningPopup(FloatLayout):
+    pass
 
 class WindowManager(ScreenManager):
     pass
@@ -164,17 +171,33 @@ class RegularWindow(Screen):
             "Evasion Attacks - Slowest": "slowest"
         }
         self.hardware_list = {
-            "Nvidia RTX 3080 Ti": "3080ti",
-            "Nvidia RTX 6000": "rtx6000"
+            "Nvidia RTX 1080 Ti": "1080",
+            "Nvidia RTX 2080 Ti": "2080",
+            "Nvidia RTX 6000": "6000"
         }
 
     # generate the output based on the options selected
     def ui_generate_button(self, application_id, defense_id, constraints_id, hardware_id):
-        settings_filename = f"UI_data/{application_id}_{self.defenses_list[defense_id]}_{constraints_id.lower()}_{self.hardware_list[hardware_id]}.json"
-        driver = Driver(settingPath=settings_filename)
-        driver.drive()
+        settings_filename = None
+        if application_id.lower() == 'image':
+            if constraints_id.lower() == 'time':
+                settings_filename = f"settings/{application_id.lower()}_all_dataset-settings.json"
+            elif constraints_id.lower() == 'accuracy':
+                show_popup()
 
-        self.parent.ids.recommendations_window.extract_recommendations(settings_filename)
+        elif application_id.lower() == 'nlp':
+            settings_filename = f"settings/{application_id.lower()}_all_dataset_{constraints_id.lower()}-settings.json"
+
+        if settings_filename is not None:
+            driver = Driver(settingPath=settings_filename)
+            driver.drive(self.defenses_list[defense_id], self.hardware_list[hardware_id])
+
+            self.parent.ids.recommendations_window.extract_recommendations(settings_filename)
+            recommender.root.transition.direction = "left"
+            recommender.root.current = "recommendations_window"
+            return True
+
+        return False
 
 class MainWindow(Screen):
     _popup = None
@@ -184,7 +207,7 @@ class MainWindow(Screen):
         global _Chosen_Setting_File_Path
         if len(_Chosen_Setting_File_Path) != 0:
             driver = Driver(settingPath=_Chosen_Setting_File_Path)
-            driver.drive()
+            driver.drive(None, None)
 
             self.parent.ids.recommendations_window.extract_recommendations(_Chosen_Setting_File_Path)
 
@@ -1050,10 +1073,14 @@ class RecommendationsWindow(Screen):
                     for attack in output_dictionary["recommendation_result"][dataset][model_classifier][threat_model]:
                         attack_panel = MDExpansionPanel(content=RecommendationsExpansion(),
                                                         panel_cls=MDExpansionPanelOneLine(text=f"Attack : {attack}"))
+                        attack_panel.content.ids.recommendations_reference_link.text = output_dictionary["recommendation_result"][dataset][model_classifier][threat_model][attack]["attack_reference_link"]
+                        attack_panel.content.ids.recommendations_description.text = output_dictionary["recommendation_result"][dataset][model_classifier][threat_model][attack]["attack_description"]
 
                         defense_box = MDBoxLayout(padding=[20, 0, 0, 0], adaptive_height=True)
                         defense_panel = MDExpansionPanel(content=RecommendationsExpansion(),
                                                          panel_cls=MDExpansionPanelOneLine(text=f"Recommended Defender : {output_dictionary['recommendation_result'][dataset][model_classifier][threat_model][attack]['recommendation']}"))
+                        defense_panel.content.ids.recommendations_reference_link.text = output_dictionary['recommendation_result'][dataset][model_classifier][threat_model][attack]["defense_reference_link"]
+                        defense_panel.content.ids.recommendations_description.text = output_dictionary['recommendation_result'][dataset][model_classifier][threat_model][attack]["defense_description"]
 
                         defense_box.add_widget(defense_panel)
                         threat_panel.ids.sub_layer_container.add_widget(attack_panel)
@@ -1079,6 +1106,9 @@ class RecommendationsWindow(Screen):
         rc.ids.layer_label.text = layer_label_text
         parent_container.ids.sub_layer_container.add_widget(rc)
         return rc
+
+    def clear_output(self,output_dictionary):
+        output_dictionary.clear()
 
 
 
@@ -1227,8 +1257,6 @@ class SaveTextInput(TextInput):
 
 
 
-
-
 class RecommenderTool(MDApp):
     def build(self):
         self.theme_cls.primary_palette = "Orange"
@@ -1237,5 +1265,5 @@ class RecommenderTool(MDApp):
         _kv = Builder.load_file("kivy.kv")
         return _kv
 
-
-RecommenderTool().run()
+recommender = RecommenderTool()
+recommender.run()

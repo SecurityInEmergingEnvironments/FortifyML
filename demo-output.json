@@ -46,11 +46,19 @@
                 "grey-box_setting": {
                     "PGD": {
                         "solver_status": "Optimal solution found",
-                        "recommendation": "Defenders_emulated_ae"
+                        "recommendation": "Defenders_emulated_ae",
+                        "attack_reference_link": "",
+                        "attack_description": "",
+                        "defense_reference_link": "",
+                        "defense_description": ""
                     },
                     "FGSM": {
                         "solver_status": "Optimal solution found",
-                        "recommendation": "Defenders_emulated_ae"
+                        "recommendation": "Defenders_emulated_ae",
+                        "attack_reference_link": "",
+                        "attack_description": "",
+                        "defense_reference_link": "",
+                        "defense_description": ""
                     }
                 }
             }

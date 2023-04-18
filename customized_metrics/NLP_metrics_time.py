@@ -1,6 +1,6 @@
-# Customized score 02
+# Customized NLP score 03
 from Interfaces import CustomizedMetricScoreInterface
-class CNS01(CustomizedMetricScoreInterface):
+class CNS03_Time(CustomizedMetricScoreInterface):
   def __init__(self, kwargs):
     CustomizedMetricScoreInterface.__init__(self, kwargs=kwargs)
     self.alpha = self.kwargs['alpha']  # time tradeoff coefficient
@@ -17,27 +17,27 @@ class CNS01(CustomizedMetricScoreInterface):
     initialTime = scoreDictionary['baseline_performance']['inference_elapsed_time_per_1000_in_s']
     addedTime = scoreDictionary['defender_performance']['inference_elapsed_time_per_1000_in_s']
 
-    naturalaccuracyWithoutDefense = scoreDictionary['baseline_performance']['natural_accuracy']
-    robustaccuracyWithoutDefense = scoreDictionary['attacker_performance']['robust_accuracy']
+    naturalF1ScoreWithoutDefense = scoreDictionary['baseline_performance']['natural_f1-score']
+    robustF1ScoreWithoutDefense = scoreDictionary['attacker_performance']['robust_f1-score']
 
-    naturalaccuracyWithDefense = scoreDictionary['defender_performance']['natural_accuracy']
-    robustaccuracyWithDefense = scoreDictionary['defender_performance']['robust_accuracy']
+    naturalF1ScoreWithDefense = scoreDictionary['defender_performance']['natural_f1-score']
+    robustF1ScoreWithDefense = scoreDictionary['defender_performance']['robust_f1-score']
 
     timeTradeOff = self.alpha * ((addedTime) / initialTime)
-    naturalaccuracyTradeOff = self.beta * ((naturalaccuracyWithDefense - naturalaccuracyWithoutDefense) / naturalaccuracyWithoutDefense)
-    robustaccuracyImprove = self.gamma * ((robustaccuracyWithDefense - robustaccuracyWithoutDefense) / robustaccuracyWithoutDefense)
+    naturalF1ScoreTradeOff = self.beta * ((naturalF1ScoreWithDefense - naturalF1ScoreWithoutDefense) / naturalF1ScoreWithoutDefense)
+    robustF1ScoreImprove = self.gamma * ((robustF1ScoreWithDefense - robustF1ScoreWithoutDefense) / robustF1ScoreWithoutDefense)
 
-    CNS01_score = ( -timeTradeOff + \
-       naturalaccuracyTradeOff + \
-         robustaccuracyImprove)
+    CNS03_score = ( -timeTradeOff + \
+       naturalF1ScoreTradeOff + \
+         robustF1ScoreImprove)
 
     result = {
       "denoiser_name": scoreDictionary['nameOfDefender'],
-      "score": CNS01_score,        # required from users
-      "details": {
+      "score": CNS03_score,        # required from users
+      "details" : {
         "weighted_inference_time_tradeOff": timeTradeOff,
-        "weighted_natural_F1_score_tradeOff": naturalaccuracyTradeOff,
-        "weighted_robust_F1_score_improvement": robustaccuracyImprove
+        "weighted_natural_F1_score_tradeOff": naturalF1ScoreTradeOff,
+        "weighted_robust_F1_score_improvement": robustF1ScoreImprove
       }
     }
     if self.showDetails:
