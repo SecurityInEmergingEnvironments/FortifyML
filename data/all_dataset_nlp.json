@@ -19,6 +19,7 @@
               "robust_accuracy": 6.5,
               "robust_f1-score": 1,
               "adv_example_generated_in_s_2080": 120,
+              "adv_example_generated_in_s_1080": 150,
               "adv_example_generated_in_s_6000": 60
             },
             "defenders": [
@@ -64,6 +65,7 @@
               "robust_accuracy": 2.3,
               "robust_f1-score": 1,
               "adv_example_generated_in_s_2080": 110,
+              "adv_example_generated_in_s_1080": 150,
               "adv_example_generated_in_s_6000": 60
             },
             "defenders": [
@@ -103,6 +105,7 @@
               "robust_accuracy": 1.0,
               "robust_f1-score": 1,
               "adv_example_generated_in_s_2080": 120,
+              "adv_example_generated_in_s_1080": 150,
               "adv_example_generated_in_s_6000": 60
             },
             "defenders": [
@@ -142,6 +145,7 @@
               "robust_accuracy": 1.0,
               "robust_f1-score": 1,
               "adv_example_generated_in_s_2080": 120,
+              "adv_example_generated_in_s_1080": 150,
               "adv_example_generated_in_s_6000": 60
             },
             "defenders": [
@@ -172,6 +176,7 @@
               "robust_accuracy": 1.0,
               "robust_f1-score": 1,
               "adv_example_generated_in_s_2080": 120,
+              "adv_example_generated_in_s_1080": 150,
               "adv_example_generated_in_s_6000": 60
             },
             "defenders": [
@@ -214,6 +219,7 @@
               "robust_accuracy": 80.5,
               "robust_f1-score": 1,
               "adv_example_generated_in_s_2080": 120,
+              "adv_example_generated_in_s_1080": 150,
               "adv_example_generated_in_s_6000": 60
             },
             "defenders": [
@@ -271,6 +277,7 @@
               "robust_accuracy": 13.7,
               "robust_f1-score": 1,
               "adv_example_generated_in_s_2080": 120,
+              "adv_example_generated_in_s_1080": 150,
               "adv_example_generated_in_s_6000": 60
             },
             "defenders": [
@@ -302,6 +309,7 @@
               "robust_accuracy": 10.5,
               "robust_f1-score": 1,
               "adv_example_generated_in_s_2080": 120,
+              "adv_example_generated_in_s_1080": 150,
               "adv_example_generated_in_s_6000": 60
             },
             "defenders": [

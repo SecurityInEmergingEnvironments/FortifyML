@@ -2,7 +2,7 @@ import json
 import os
 
 from kivy.lang import Builder
-from kivy.properties import ObjectProperty, VariableListProperty
+from kivy.properties import ObjectProperty
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.button import Button
 from kivy.uix.dropdown import DropDown
@@ -15,8 +15,11 @@ from kivy.uix.spinner import Spinner
 from kivy.uix.textinput import TextInput
 from kivymd.app import MDApp
 from kivymd.uix.boxlayout import MDBoxLayout
+from kivymd.uix.button import MDFlatButton
 from kivymd.uix.expansionpanel import MDExpansionPanel, MDExpansionPanelOneLine
 from kivymd.uix.label import MDLabel
+from kivymd.uix.dialog import MDDialog
+from kivy.metrics import dp
 
 from Driver import Driver
 
@@ -43,7 +46,8 @@ MODEL_PERFORMANCE_SUGGESTIONS = ['natural_accuracy', 'natural_precision', 'natur
                                  'inference_elapsed_time_per_1000_in_s']
 
 ATTACKER_PERFORMANCE_SUGGESTIONS = ['robust_accuracy', 'robust_precision', 'robust_recall', 'robust_f1-score',
-                                    'adv_example_generated_in_s_2080', 'adv_example_generated_in_s_6000']
+                                    'adv_example_generated_in_s_2080', 'adv_example_generated_in_s_6000',
+                                    'adv_example_generated_in_s_1080']
 
 DEFENDER_PERFORMANCE_SUGGESTIONS = ['natural_accuracy', 'natural_precision', 'natural_recall', 'natural_f1-score',
                                     'robust_accuracy', 'robust_precision', 'robust_recall', 'robust_f1-score',
@@ -146,10 +150,28 @@ def show_save_explorer(widget, hint_text):
     widget._popup.open()
     widget._popup.content.ids.text_input.focus = True
 
-def show_popup():
+def show_warning_popup():
     content = WarningPopup()
-    popupWindow = Popup(title="Warning", content=content, size_hint=(0.9,0.9))
+    popupWindow = Popup(title="Warning", content=content, size_hint=(0.7, 0.7))
     popupWindow.open()
+
+class ExitPopup(MDDialog):
+    def __init__(self, **kwargs):
+        super(ExitPopup, self).__init__(**kwargs)
+        self.dialog = MDDialog(title="Close Application", text="Are you sure?", size_hint=(.3, None), height=dp(200),
+                               buttons=[
+                                   MDFlatButton(text="Cancel", on_release=self.dismiss_callback),
+                                   MDFlatButton(text="Confirm", on_release=self.close_app)
+                               ])
+
+        self.dialog.open()
+
+    def close_app(self, *args):
+        self.dialog.dismiss()
+        MDApp.get_running_app().stop()
+
+    def dismiss_callback(self, *args):
+        self.dialog.dismiss()
 
 class WarningPopup(FloatLayout):
     pass
@@ -183,7 +205,7 @@ class RegularWindow(Screen):
             if constraints_id.lower() == 'time':
                 settings_filename = f"settings/{application_id.lower()}_all_dataset-settings.json"
             elif constraints_id.lower() == 'accuracy':
-                show_popup()
+                show_warning_popup()
 
         elif application_id.lower() == 'nlp':
             settings_filename = f"settings/{application_id.lower()}_all_dataset_{constraints_id.lower()}-settings.json"
@@ -1110,7 +1132,8 @@ class RecommendationsWindow(Screen):
     def clear_output(self,output_dictionary):
         output_dictionary.clear()
 
-
+    def stop_app(self):
+        ExitPopup()
 
 # contains an expand/collapse button, a label for the layer (dataset or model classifier or threat model etc.)
 # and contains a BoxLayout to store its nested layer (ex: dataset would store model classifiers)

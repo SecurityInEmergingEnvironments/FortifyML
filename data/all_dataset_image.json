@@ -10,7 +10,10 @@
           "PGD": {
             "type_of_attack": "evasion",
             "attacker_performance": {
-              "robust_f1-score": 1
+              "robust_f1-score": 1,
+              "adv_example_generated_in_s_2080": 120,
+              "adv_example_generated_in_s_1080": 150,
+              "adv_example_generated_in_s_6000": 60
             },
             "defenders": [
               {
@@ -126,7 +129,10 @@
           "FGSM": {
             "type_of_attack": "evasion",
             "attacker_performance": {
-              "robust_f1-score": 20
+              "robust_f1-score": 20,
+              "adv_example_generated_in_s_2080": 120,
+              "adv_example_generated_in_s_1080": 150,
+              "adv_example_generated_in_s_6000": 60
             },
             "defenders": [
               {
@@ -242,7 +248,10 @@
           "DeepFool": {
             "type_of_attack": "evasion",
             "attacker_performance": {
-              "robust_f1-score": 8
+              "robust_f1-score": 8,
+              "adv_example_generated_in_s_2080": 120,
+              "adv_example_generated_in_s_1080": 150,
+              "adv_example_generated_in_s_6000": 60
             },
             "defenders": [
               {
@@ -360,7 +369,10 @@
           "PGD": {
             "type_of_attack": "evasion",
             "attacker_performance": {
-              "robust_f1-score": 1
+              "robust_f1-score": 1,
+              "adv_example_generated_in_s_2080": 120,
+              "adv_example_generated_in_s_1080": 150,
+              "adv_example_generated_in_s_6000": 60
             },
             "defenders": [
               {
@@ -449,7 +461,10 @@
           "FGSM": {
             "type_of_attack": "evasion",
             "attacker_performance": {
-              "robust_f1-score": 20
+              "robust_f1-score": 20,
+              "adv_example_generated_in_s_2080": 120,
+              "adv_example_generated_in_s_1080": 150,
+              "adv_example_generated_in_s_6000": 60
             },
             "defenders": [
               {
@@ -538,7 +553,10 @@
           "DeepFool": {
             "type_of_attack": "evasion",
             "attacker_performance": {
-              "robust_f1-score": 8
+              "robust_f1-score": 8,
+              "adv_example_generated_in_s_2080": 120,
+              "adv_example_generated_in_s_1080": 150,
+              "adv_example_generated_in_s_6000": 60
             },
             "defenders": [
               {
@@ -635,7 +653,10 @@
           "PGD": {
             "type_of_attack": "evasion",
             "attacker_performance": {
-              "robust_f1-score": 0.4
+              "robust_f1-score": 0.4,
+              "adv_example_generated_in_s_2080": 120,
+              "adv_example_generated_in_s_1080": 150,
+              "adv_example_generated_in_s_6000": 60
             },
             "defenders": [
               {
@@ -751,7 +772,10 @@
           "FGSM": {
             "type_of_attack": "evasion",
             "attacker_performance": {
-              "robust_f1-score": 21
+              "robust_f1-score": 21,
+              "adv_example_generated_in_s_2080": 120,
+              "adv_example_generated_in_s_1080": 150,
+              "adv_example_generated_in_s_6000": 60
             },
             "defenders": [
               {
@@ -867,7 +891,10 @@
           "DeepFool": {
             "type_of_attack": "evasion",
             "attacker_performance": {
-              "robust_f1-score": 13
+              "robust_f1-score": 13,
+              "adv_example_generated_in_s_2080": 120,
+              "adv_example_generated_in_s_1080": 150,
+              "adv_example_generated_in_s_6000": 60
             },
             "defenders": [
               {
@@ -985,7 +1012,10 @@
           "PGD": {
             "type_of_attack": "evasion",
             "attacker_performance": {
-              "robust_f1-score": 0.44
+              "robust_f1-score": 0.44,
+              "adv_example_generated_in_s_2080": 120,
+              "adv_example_generated_in_s_1080": 150,
+              "adv_example_generated_in_s_6000": 60
             },
             "defenders": [
               {
@@ -1074,7 +1104,10 @@
           "FGSM": {
             "type_of_attack": "evasion",
             "attacker_performance": {
-              "robust_f1-score": 21
+              "robust_f1-score": 21,
+              "adv_example_generated_in_s_2080": 120,
+              "adv_example_generated_in_s_1080": 150,
+              "adv_example_generated_in_s_6000": 60
             },
             "defenders": [
               {
@@ -1163,7 +1196,10 @@
           "DeepFool": {
             "type_of_attack": "evasion",
             "attacker_performance": {
-              "robust_f1-score": 13
+              "robust_f1-score": 13,
+              "adv_example_generated_in_s_2080": 120,
+              "adv_example_generated_in_s_1080": 150,
+              "adv_example_generated_in_s_6000": 60
             },
             "defenders": [
               {
@@ -1260,7 +1296,10 @@
           "PGD": {
             "type_of_attack": "evasion",
             "attacker_performance": {
-              "robust_f1-score": 1
+              "robust_f1-score": 1,
+              "adv_example_generated_in_s_2080": 120,
+              "adv_example_generated_in_s_1080": 150,
+              "adv_example_generated_in_s_6000": 60
             },
             "defenders": [
               {
@@ -1381,7 +1420,10 @@
           "FGSM": {
             "type_of_attack": "evasion",
             "attacker_performance": {
-              "robust_f1-score": 23
+              "robust_f1-score": 23,
+              "adv_example_generated_in_s_2080": 120,
+              "adv_example_generated_in_s_1080": 150,
+              "adv_example_generated_in_s_6000": 60
             },
             "defenders": [
               {
@@ -1502,7 +1544,10 @@
           "DeepFool": {
             "type_of_attack": "evasion",
             "attacker_performance": {
-              "robust_f1-score": 17
+              "robust_f1-score": 17,
+              "adv_example_generated_in_s_2080": 120,
+              "adv_example_generated_in_s_1080": 150,
+              "adv_example_generated_in_s_6000": 60
             },
             "defenders": [
               {
@@ -1625,7 +1670,10 @@
           "PGD": {
             "type_of_attack": "evasion",
             "attacker_performance": {
-              "robust_f1-score": 1
+              "robust_f1-score": 1,
+              "adv_example_generated_in_s_2080": 120,
+              "adv_example_generated_in_s_1080": 150,
+              "adv_example_generated_in_s_6000": 60
             },
             "defenders": [
               {
@@ -1714,7 +1762,10 @@
           "FGSM": {
             "type_of_attack": "evasion",
             "attacker_performance": {
-              "robust_f1-score": 23
+              "robust_f1-score": 23,
+              "adv_example_generated_in_s_2080": 120,
+              "adv_example_generated_in_s_1080": 150,
+              "adv_example_generated_in_s_6000": 60
             },
             "defenders": [
               {
@@ -1803,7 +1854,10 @@
           "DeepFool": {
             "type_of_attack": "evasion",
             "attacker_performance": {
-              "robust_f1-score": 17
+              "robust_f1-score": 17,
+              "adv_example_generated_in_s_2080": 120,
+              "adv_example_generated_in_s_1080": 150,
+              "adv_example_generated_in_s_6000": 60
             },
             "defenders": [
               {
@@ -1902,7 +1956,10 @@
           "PGD": {
             "type_of_attack": "evasion",
             "attacker_performance": {
-              "robust_f1-score": 2.0
+              "robust_f1-score": 2.0,
+              "adv_example_generated_in_s_2080": 120,
+              "adv_example_generated_in_s_1080": 150,
+              "adv_example_generated_in_s_6000": 60
             },
             "defenders": [
               {
@@ -2023,7 +2080,10 @@
           "FGSM": {
             "type_of_attack": "evasion",
             "attacker_performance": {
-              "robust_f1-score": 21
+              "robust_f1-score": 21,
+              "adv_example_generated_in_s_2080": 120,
+              "adv_example_generated_in_s_1080": 150,
+              "adv_example_generated_in_s_6000": 60
             },
             "defenders": [
               {
@@ -2144,7 +2204,10 @@
           "DeepFool": {
             "type_of_attack": "evasion",
             "attacker_performance": {
-              "robust_f1-score": 10
+              "robust_f1-score": 10,
+              "adv_example_generated_in_s_2080": 120,
+              "adv_example_generated_in_s_1080": 150,
+              "adv_example_generated_in_s_6000": 60
             },
             "defenders": [
               {
@@ -2267,7 +2330,10 @@
           "PGD": {
             "type_of_attack": "evasion",
             "attacker_performance": {
-              "robust_f1-score": 2.0
+              "robust_f1-score": 2.0,
+              "adv_example_generated_in_s_2080": 120,
+              "adv_example_generated_in_s_1080": 150,
+              "adv_example_generated_in_s_6000": 60
             },
             "defenders": [
               {
@@ -2356,7 +2422,10 @@
           "FGSM": {
             "type_of_attack": "evasion",
             "attacker_performance": {
-              "robust_f1-score": 21
+              "robust_f1-score": 21,
+              "adv_example_generated_in_s_2080": 120,
+              "adv_example_generated_in_s_1080": 150,
+              "adv_example_generated_in_s_6000": 60
             },
             "defenders": [
               {
@@ -2445,7 +2514,10 @@
           "DeepFool": {
             "type_of_attack": "evasion",
             "attacker_performance": {
-              "robust_f1-score": 10
+              "robust_f1-score": 10,
+              "adv_example_generated_in_s_2080": 120,
+              "adv_example_generated_in_s_1080": 150,
+              "adv_example_generated_in_s_6000": 60
             },
             "defenders": [
               {
@@ -2542,7 +2614,10 @@
           "PGD": {
             "type_of_attack": "evasion",
             "attacker_performance": {
-              "robust_f1-score": 0.44
+              "robust_f1-score": 0.44,
+              "adv_example_generated_in_s_2080": 120,
+              "adv_example_generated_in_s_1080": 150,
+              "adv_example_generated_in_s_6000": 60
             },
             "defenders": [
               {
@@ -2663,7 +2738,10 @@
           "FGSM": {
             "type_of_attack": "evasion",
             "attacker_performance": {
-              "robust_f1-score": 18
+              "robust_f1-score": 18,
+              "adv_example_generated_in_s_2080": 120,
+              "adv_example_generated_in_s_1080": 150,
+              "adv_example_generated_in_s_6000": 60
             },
             "defenders": [
               {
@@ -2784,7 +2862,10 @@
           "DeepFool": {
             "type_of_attack": "evasion",
             "attacker_performance": {
-              "robust_f1-score": 14
+              "robust_f1-score": 14,
+              "adv_example_generated_in_s_2080": 120,
+              "adv_example_generated_in_s_1080": 150,
+              "adv_example_generated_in_s_6000": 60
             },
             "defenders": [
               {
@@ -2907,7 +2988,10 @@
           "PGD": {
             "type_of_attack": "evasion",
             "attacker_performance": {
-              "robust_f1-score": 0.44
+              "robust_f1-score": 0.44,
+              "adv_example_generated_in_s_2080": 120,
+              "adv_example_generated_in_s_1080": 150,
+              "adv_example_generated_in_s_6000": 60
             },
             "defenders": [
               {
@@ -2996,7 +3080,10 @@
           "FGSM": {
             "type_of_attack": "evasion",
             "attacker_performance": {
-              "robust_f1-score": 18
+              "robust_f1-score": 18,
+              "adv_example_generated_in_s_2080": 120,
+              "adv_example_generated_in_s_1080": 150,
+              "adv_example_generated_in_s_6000": 60
             },
             "defenders": [
               {
@@ -3085,7 +3172,10 @@
           "DeepFool": {
             "type_of_attack": "evasion",
             "attacker_performance": {
-              "robust_f1-score": 14
+              "robust_f1-score": 14,
+              "adv_example_generated_in_s_2080": 120,
+              "adv_example_generated_in_s_1080": 150,
+              "adv_example_generated_in_s_6000": 60
             },
             "defenders": [
               {
@@ -3182,7 +3272,10 @@
           "PGD": {
             "type_of_attack": "evasion",
             "attacker_performance": {
-              "robust_f1-score": 2
+              "robust_f1-score": 2,
+              "adv_example_generated_in_s_2080": 120,
+              "adv_example_generated_in_s_1080": 150,
+              "adv_example_generated_in_s_6000": 60
             },
             "defenders": [
               {
@@ -3303,7 +3396,10 @@
           "FGSM": {
             "type_of_attack": "evasion",
             "attacker_performance": {
-              "robust_f1-score": 17
+              "robust_f1-score": 17,
+              "adv_example_generated_in_s_2080": 120,
+              "adv_example_generated_in_s_1080": 150,
+              "adv_example_generated_in_s_6000": 60
             },
             "defenders": [
               {
@@ -3424,7 +3520,10 @@
           "DeepFool": {
             "type_of_attack": "evasion",
             "attacker_performance": {
-              "robust_f1-score": 17
+              "robust_f1-score": 17,
+              "adv_example_generated_in_s_2080": 120,
+              "adv_example_generated_in_s_1080": 150,
+              "adv_example_generated_in_s_6000": 60
             },
             "defenders": [
               {
@@ -3547,7 +3646,10 @@
           "PGD": {
             "type_of_attack": "evasion",
             "attacker_performance": {
-              "robust_f1-score": 2
+              "robust_f1-score": 2,
+              "adv_example_generated_in_s_2080": 120,
+              "adv_example_generated_in_s_1080": 150,
+              "adv_example_generated_in_s_6000": 60
             },
             "defenders": [
               {
@@ -3636,7 +3738,10 @@
           "FGSM": {
             "type_of_attack": "evasion",
             "attacker_performance": {
-              "robust_f1-score": 17
+              "robust_f1-score": 17,
+              "adv_example_generated_in_s_2080": 120,
+              "adv_example_generated_in_s_1080": 150,
+              "adv_example_generated_in_s_6000": 60
             },
             "defenders": [
               {
@@ -3725,7 +3830,10 @@
           "DeepFool": {
             "type_of_attack": "evasion",
             "attacker_performance": {
-              "robust_f1-score": 17
+              "robust_f1-score": 17,
+              "adv_example_generated_in_s_2080": 120,
+              "adv_example_generated_in_s_1080": 150,
+              "adv_example_generated_in_s_6000": 60
             },
             "defenders": [
               {
@@ -3824,7 +3932,10 @@
           "PGD": {
             "type_of_attack": "evasion",
             "attacker_performance": {
-              "robust_f1-score": 3
+              "robust_f1-score": 3,
+              "adv_example_generated_in_s_2080": 120,
+              "adv_example_generated_in_s_1080": 150,
+              "adv_example_generated_in_s_6000": 60
             },
             "defenders": [
               {
@@ -3945,7 +4056,10 @@
           "FGSM": {
             "type_of_attack": "evasion",
             "attacker_performance": {
-              "robust_f1-score": 17
+              "robust_f1-score": 17,
+              "adv_example_generated_in_s_2080": 120,
+              "adv_example_generated_in_s_1080": 150,
+              "adv_example_generated_in_s_6000": 60
             },
             "defenders": [
               {
@@ -4066,7 +4180,10 @@
           "DeepFool": {
             "type_of_attack": "evasion",
             "attacker_performance": {
-              "robust_f1-score": 46
+              "robust_f1-score": 46,
+              "adv_example_generated_in_s_2080": 120,
+              "adv_example_generated_in_s_1080": 150,
+              "adv_example_generated_in_s_6000": 60
             },
             "defenders": [
               {
@@ -4189,7 +4306,10 @@
           "PGD": {
             "type_of_attack": "evasion",
             "attacker_performance": {
-              "robust_f1-score": 3
+              "robust_f1-score": 3,
+              "adv_example_generated_in_s_2080": 120,
+              "adv_example_generated_in_s_1080": 150,
+              "adv_example_generated_in_s_6000": 60
             },
             "defenders": [
               {
@@ -4278,7 +4398,10 @@
           "FGSM": {
             "type_of_attack": "evasion",
             "attacker_performance": {
-              "robust_f1-score": 17
+              "robust_f1-score": 17,
+              "adv_example_generated_in_s_2080": 120,
+              "adv_example_generated_in_s_1080": 150,
+              "adv_example_generated_in_s_6000": 60
             },
             "defenders": [
               {
@@ -4367,7 +4490,10 @@
           "DeepFool": {
             "type_of_attack": "evasion",
             "attacker_performance": {
-              "robust_f1-score": 46
+              "robust_f1-score": 46,
+              "adv_example_generated_in_s_2080": 120,
+              "adv_example_generated_in_s_1080": 150,
+              "adv_example_generated_in_s_6000": 60
             },
             "defenders": [
               {
@@ -4464,7 +4590,10 @@
           "PGD": {
             "type_of_attack": "evasion",
             "attacker_performance": {
-              "robust_f1-score": 22
+              "robust_f1-score": 22,
+              "adv_example_generated_in_s_2080": 120,
+              "adv_example_generated_in_s_1080": 150,
+              "adv_example_generated_in_s_6000": 60
             },
             "defenders": [
               {
@@ -4585,7 +4714,10 @@
           "FGSM": {
             "type_of_attack": "evasion",
             "attacker_performance": {
-              "robust_f1-score": 37
+              "robust_f1-score": 37,
+              "adv_example_generated_in_s_2080": 120,
+              "adv_example_generated_in_s_1080": 150,
+              "adv_example_generated_in_s_6000": 60
             },
             "defenders": [
               {
@@ -4706,7 +4838,10 @@
           "DeepFool": {
             "type_of_attack": "evasion",
             "attacker_performance": {
-              "robust_f1-score": 69
+              "robust_f1-score": 69,
+              "adv_example_generated_in_s_2080": 120,
+              "adv_example_generated_in_s_1080": 150,
+              "adv_example_generated_in_s_6000": 60
             },
             "defenders": [
               {
@@ -4829,7 +4964,10 @@
           "PGD": {
             "type_of_attack": "evasion",
             "attacker_performance": {
-              "robust_f1-score": 22
+              "robust_f1-score": 22,
+              "adv_example_generated_in_s_2080": 120,
+              "adv_example_generated_in_s_1080": 150,
+              "adv_example_generated_in_s_6000": 60
             },
             "defenders": [
               {
@@ -4918,7 +5056,10 @@
           "FGSM": {
             "type_of_attack": "evasion",
             "attacker_performance": {
-              "robust_f1-score": 37
+              "robust_f1-score": 37,
+              "adv_example_generated_in_s_2080": 120,
+              "adv_example_generated_in_s_1080": 150,
+              "adv_example_generated_in_s_6000": 60
             },
             "defenders": [
               {
@@ -5007,7 +5148,10 @@
           "DeepFool": {
             "type_of_attack": "evasion",
             "attacker_performance": {
-              "robust_f1-score": 69
+              "robust_f1-score": 69,
+              "adv_example_generated_in_s_2080": 120,
+              "adv_example_generated_in_s_1080": 150,
+              "adv_example_generated_in_s_6000": 60
             },
             "defenders": [
               {
@@ -5104,7 +5248,10 @@
           "PGD": {
             "type_of_attack": "evasion",
             "attacker_performance": {
-              "robust_f1-score": 45
+              "robust_f1-score": 45,
+              "adv_example_generated_in_s_2080": 120,
+              "adv_example_generated_in_s_1080": 150,
+              "adv_example_generated_in_s_6000": 60
             },
             "defenders": [
               {
@@ -5225,7 +5372,10 @@
           "FGSM": {
             "type_of_attack": "evasion",
             "attacker_performance": {
-              "robust_f1-score": 54
+              "robust_f1-score": 54,
+              "adv_example_generated_in_s_2080": 120,
+              "adv_example_generated_in_s_1080": 150,
+              "adv_example_generated_in_s_6000": 60
             },
             "defenders": [
               {
@@ -5346,7 +5496,10 @@
           "DeepFool": {
             "type_of_attack": "evasion",
             "attacker_performance": {
-              "robust_f1-score": 55
+              "robust_f1-score": 55,
+              "adv_example_generated_in_s_2080": 120,
+              "adv_example_generated_in_s_1080": 150,
+              "adv_example_generated_in_s_6000": 60
             },
             "defenders": [
               {
@@ -5469,7 +5622,10 @@
           "PGD": {
             "type_of_attack": "evasion",
             "attacker_performance": {
-              "robust_f1-score": 45
+              "robust_f1-score": 45,
+              "adv_example_generated_in_s_2080": 120,
+              "adv_example_generated_in_s_1080": 150,
+              "adv_example_generated_in_s_6000": 60
             },
             "defenders": [
               {
@@ -5558,7 +5714,10 @@
           "FGSM": {
             "type_of_attack": "evasion",
             "attacker_performance": {
-              "robust_f1-score": 54
+              "robust_f1-score": 54,
+              "adv_example_generated_in_s_2080": 120,
+              "adv_example_generated_in_s_1080": 150,
+              "adv_example_generated_in_s_6000": 60
             },
             "defenders": [
               {
@@ -5647,7 +5806,10 @@
           "DeepFool": {
             "type_of_attack": "evasion",
             "attacker_performance": {
-              "robust_f1-score": 55
+              "robust_f1-score": 55,
+              "adv_example_generated_in_s_2080": 120,
+              "adv_example_generated_in_s_1080": 150,
+              "adv_example_generated_in_s_6000": 60
             },
             "defenders": [
               {

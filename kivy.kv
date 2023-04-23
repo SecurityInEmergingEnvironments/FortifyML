@@ -23,8 +23,7 @@ WindowManager:
 <WarningPopup>:
     id: warning_popup
     Label:
-        text: "For Image, there is no analysis performed for accuracy. Please select time as a constraint.
-               Please press ESC to continue."
+        text: "For Image, there is no analysis performed for accuracy. \nPlease select time as a constraint. \nPlease press ESC to continue."
         font_size: "20dp"
         size_hint: 0.6, 0.2
         pos_hint: {"x":0.2, "top":1}
@@ -50,16 +49,7 @@ WindowManager:
     BoxLayout:
         id: vl1.1
         orientation: 'vertical'
-
-        BoxLayout:
-            id: hl1.1.1
-            orientation: 'horizontal'
-
-            Button:
-                text: "Advanced Mode"
-                on_release:
-                    app.root.current = "main_window"
-                    app.root.transition.direction = "left"
+        padding: [10,10,10,10]
 
         BoxLayout:
             id: hl1.1.2
@@ -72,7 +62,6 @@ WindowManager:
                 values: ["Image", "NLP"]
                 background_color: color_button if self.state == 'normal' else color_button_pressed
                 option_cls: Factory.get('sp')
-                on_text:
 
 
             Spinner:
@@ -101,6 +90,16 @@ WindowManager:
                 background_color: color_button if self.state == 'normal' else color_button_pressed
                 option_cls: Factory.get('sp')
 
+        BoxLayout:
+            id: hl1.1.1
+            orientation: 'horizontal'
+            padding: [0,10,0,10]
+
+            Button:
+                text: "Advanced Mode"
+                on_release:
+                    app.root.current = "main_window"
+                    app.root.transition.direction = "left"
 
         Button:
             text: "Generate Recommendations"
@@ -1005,7 +1004,7 @@ WindowManager:
         Button:
             text: "Close"
             size_hint: .5, 1
-            on_release: app.stop()
+            on_release: self.parent.parent.parent.parent.stop_app()
 
 
 <RecommendationsScrollView@ScrollView>:
