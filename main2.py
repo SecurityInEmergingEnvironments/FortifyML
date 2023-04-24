@@ -1,5 +1,6 @@
 import json
 import os
+import webbrowser
 
 from kivy.lang import Builder
 from kivy.properties import ObjectProperty
@@ -17,9 +18,9 @@ from kivymd.app import MDApp
 from kivymd.uix.boxlayout import MDBoxLayout
 from kivymd.uix.button import MDFlatButton
 from kivymd.uix.expansionpanel import MDExpansionPanel, MDExpansionPanelOneLine
-from kivymd.uix.label import MDLabel
 from kivymd.uix.dialog import MDDialog
 from kivy.metrics import dp
+
 
 from Driver import Driver
 
@@ -1129,8 +1130,8 @@ class RecommendationsWindow(Screen):
         parent_container.ids.sub_layer_container.add_widget(rc)
         return rc
 
-    def clear_output(self,output_dictionary):
-        output_dictionary.clear()
+    def clear_output(self):
+        self.ids.recommendations_scrollview.ids.sub_layer_container.clear_widgets()
 
     def stop_app(self):
         ExitPopup()

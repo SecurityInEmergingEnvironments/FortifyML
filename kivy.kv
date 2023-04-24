@@ -1,9 +1,10 @@
 #: import Factory kivy.factory.Factory
+#: import Window kivy.core.window.Window
 #: set color_button (1, 1, 1, 1)
 #: set color_button_pressed (0.84, 0.3, 0.6, 1)
 #: set color_font (1, 0, 1, 1)
 
-#: import Window kivy.core.window.Window
+
 
 WindowManager:
     id: window_manager
@@ -114,13 +115,7 @@ WindowManager:
 
     BoxLayout:
         orientation: 'vertical'
-
-        Button:
-            text: "Back"
-            size_hint: .2, .2
-            on_release:
-                app.root.current = "regular_window"
-                app.root.transition.direction = "right"
+        padding: [10,10,10,0]
 
         Label:
             text: "FortifyML: Machine Learning Security Recommender  v1.0"
@@ -129,6 +124,13 @@ WindowManager:
 
         MainMenuButtonsContainer:
             id: main_menu_buttons_container
+
+        Button:
+            text: "Back"
+            size_hint: .5, .1
+            on_release:
+                app.root.current = "regular_window"
+                app.root.transition.direction = "right"
 
 
 <MainMenuButtonsContainer@BoxLayout>:
@@ -999,7 +1001,7 @@ WindowManager:
             on_release:
                 app.root.current = "main_window"
                 app.root.transition.direction = "right"
-                app.clear_output
+                self.parent.parent.parent.parent.clear_output()
 
         Button:
             text: "Close"
