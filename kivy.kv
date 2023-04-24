@@ -1,12 +1,112 @@
+#: import Factory kivy.factory.Factory
+#: import Window kivy.core.window.Window
+#: set color_button (1, 1, 1, 1)
+#: set color_button_pressed (0.84, 0.3, 0.6, 1)
+#: set color_font (1, 0, 1, 1)
+
+
+
 WindowManager:
     id: window_manager
 
+    RegularWindow:
     MainWindow:
     DataWindow:
     SettingsWindow:
         id: settings_window
     RecommendationsWindow:
         id: recommendations_window
+
+<sp@SpinnerOption>:
+    background_color: color_button if self.state == 'down' else color_button_pressed
+    color: color_font
+
+<WarningPopup>:
+    id: warning_popup
+    Label:
+        text: "For Image, there is no analysis performed for accuracy. \nPlease select time as a constraint. \nPlease press ESC to continue."
+        font_size: "20dp"
+        size_hint: 0.6, 0.2
+        pos_hint: {"x":0.2, "top":1}
+        color: color_font
+
+<RegularWindow>:
+    name: "regular_window"
+    id: regular_window
+
+    BoxLayout:
+        id: vl1
+        orientation: 'vertical'
+
+        Label:
+            text: "FortifyML: Machine Learning Security Recommender  v1.1"
+            font_size: "20dp"
+            size_hint: 1, .2
+
+        RegularWindowContainer:
+            id:Regular_window_container
+
+<RegularWindowContainer@BoxLayout>
+    BoxLayout:
+        id: vl1.1
+        orientation: 'vertical'
+        padding: [10,10,10,10]
+
+        BoxLayout:
+            id: hl1.1.2
+            orientation: 'horizontal'
+
+            Spinner:
+                id: application_id
+                text: "Application"
+                #background_color : 1, 0, 1, 1
+                values: ["Image", "NLP"]
+                background_color: color_button if self.state == 'normal' else color_button_pressed
+                option_cls: Factory.get('sp')
+
+
+            Spinner:
+                id: defense_id
+                text: "Defense Against"
+                values: root.parent.parent.defenses_list.keys()
+                background_color: color_button if self.state == 'normal' else color_button_pressed
+                option_cls: Factory.get('sp')
+
+        BoxLayout:
+            id: hl1.1.3
+            orientation: 'horizontal'
+
+            Spinner:
+                id: constraints_id
+                text: "Constraints"
+                values: ["Time", "Accuracy"]
+                background_color: color_button if self.state == 'normal' else color_button_pressed
+                option_cls: Factory.get('sp')
+
+
+            Spinner:
+                id: hardware_id
+                text: "Hardware"
+                values: root.parent.parent.hardware_list.keys()
+                background_color: color_button if self.state == 'normal' else color_button_pressed
+                option_cls: Factory.get('sp')
+
+        BoxLayout:
+            id: hl1.1.1
+            orientation: 'horizontal'
+            padding: [0,10,0,10]
+
+            Button:
+                text: "Advanced Mode"
+                on_release:
+                    app.root.current = "main_window"
+                    app.root.transition.direction = "left"
+
+        Button:
+            text: "Generate Recommendations"
+            on_release:
+                root.parent.parent.ui_generate_button(application_id.text, defense_id.text, constraints_id.text, hardware_id.text)
+
 
 
 <MainWindow>:
@@ -15,22 +115,30 @@ WindowManager:
 
     BoxLayout:
         orientation: 'vertical'
+        padding: [10,10,10,0]
 
         Label:
-            text: "Recommender Tool v1.0"
+            text: "FortifyML: Machine Learning Security Recommender  v1.0"
             font_size: "20dp"
             size_hint: 1, .2
 
         MainMenuButtonsContainer:
             id: main_menu_buttons_container
 
+        Button:
+            text: "Back"
+            size_hint: .5, .1
+            on_release:
+                app.root.current = "regular_window"
+                app.root.transition.direction = "right"
+
 
 <MainMenuButtonsContainer@BoxLayout>:
-    size_hint: 1, .5
+    #size_hint: 1, .5
 
     Button:
         text: "Create Data Input File"
-#        color: 1, 0, 1, 1
+        #color: 1, 0, 1, 1
         on_release:
             app.root.current = "data_window"
             app.root.transition.direction = "left"
@@ -855,24 +963,50 @@ WindowManager:
         id: recommendations_boxlayout
         orientation: 'vertical'
 
-        RecommendationsMenuBarBoxLayout:
+        Label:
+            text: "Recommendations"
+            font_size: "30dp"
+            size_hint: 1, .2
 
         RecommendationsScrollView:
             id: recommendations_scrollview
 
+        RecommendationsMenuBarBoxLayout:
+
+
+<RecommendationsExpansion>:
+    adaptive_height: True
+    orientation: 'vertical'
+
+    BoxLayout:
+        orientation: 'vertical'
+        id: box
+        padding: [20,0,0,0]
+
+        Label:
+            id: recommendations_reference_link
+            text_size: (self.width, None)
+
+        Label:
+            id: recommendations_description
+            text_size: (self.width, None)
 
 <RecommendationsMenuBarBoxLayout@BoxLayout>:
-    size_hint: 1, .1
+    size_hint: 1, .2
 
-    Button:
-        text: "Back"
-        size_hint: .2, 1
-        on_release:
-            app.root.current = "main_window"
-            app.root.transition.direction = "right"
+    BoxLayout:
+        Button:
+            text: "Back"
+            size_hint: .5, 1
+            on_release:
+                app.root.current = "main_window"
+                app.root.transition.direction = "right"
+                self.parent.parent.parent.parent.clear_output()
 
-    Label:
-        text: "Recommendations"
+        Button:
+            text: "Close"
+            size_hint: .5, 1
+            on_release: self.parent.parent.parent.parent.stop_app()
 
 
 <RecommendationsScrollView@ScrollView>:
@@ -881,9 +1015,9 @@ WindowManager:
 
     BoxLayout:
         orientation: 'vertical'
+        id: sub_layer_container
         size_hint: 1, None
         height: self.minimum_height
-        id: sub_layer_container
 
 
 <RecommendationContainer>:
@@ -897,36 +1031,21 @@ WindowManager:
         size_hint: 1, None
         height: layer_container.minimum_height
 
-        Button:
-            id: expansion_button
-            text: "-"
-            size_hint: None, None
-            height: "30dp"
-            width: "30dp"
-            on_press:
-            # expands/collapses the contents
-                if sub_layer_container.opacity == 1: \
-                sub_layer_container.opacity = 0 ; \
-                sub_layer_container.height = 0 ; \
-                self.text = "+"
-                else: \
-                sub_layer_container.opacity = 1 ; \
-                sub_layer_container.height = sub_layer_container.minimum_height ; \
-                self.text = "-"
-
         RecommendationLabel:
             id: layer_label
             text: "layer default"
+            color: color_font
 
     BoxLayout:
         id: sub_layer_container
         orientation: 'vertical'
         size_hint_y: None
         height: sub_layer_container.minimum_height
+        padding: [20,0,0,0]
 
 
 <RecommendationLabel>:
-    font_size: 15
+    font_size: 20
     text: "default"
     size_hint: None, None
     height: "30dp"

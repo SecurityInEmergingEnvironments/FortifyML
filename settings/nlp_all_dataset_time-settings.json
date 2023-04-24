@@ -1,0 +1,37 @@
+{
+  "input_data_path":"data/all_dataset_nlp.json",
+  "show_outcome_details": false,
+  "customized_metric_score":[
+    {
+      "name":"CNS03_Time",
+      "path": "customized_metrics.NLP_metrics_time",
+      "scoreCalculatorParam":{
+        "showDetails": true,
+        "alpha": 1,
+        "beta": 1,
+        "gamma": 1
+      }
+    }
+  ],
+  "solver":{
+    "name": "PulP",
+    "path": "Solvers.ConstraintHandler",
+    "constraints":[
+      {
+        "constraint": "LpMaximize"
+      },
+      {
+        "constraint": "max",
+        "metric_name": "CNS03_Time"
+      },
+      {
+        "constraint": ">=",
+        "constraint_value": 90,
+        "metric_name": "natural_accuracy"
+      }
+    ]
+  },
+  "output":{
+    "output_file_path": "outputs/all_dataset_nlp_accuracy.json"
+  }
+}

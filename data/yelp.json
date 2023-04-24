@@ -1,0 +1,79 @@
+{
+  "context": {
+    "GPU": "NVIDIA_RTX-6000"
+  },
+  "data": {
+    "yelp": {
+      "bert": {
+        "baseline_performance": {
+          "natural_accuracy": 95.28,
+          "natural_f1-score": 95,
+          "inference_elapsed_time_per_1000_in_s": 4.43
+        },
+        "black-box_setting": {
+          "pwws": {
+            "type_of_attack": "evasion",
+            "attack_reference_link": "https://arxiv.org/pdf/2211.02878.pdf",
+            "attack_description": "PWWS (Projected Word-Wise Salient Features) is an evasion attack that is used to generate adversarial examples for text classification models.",
+            "attackParams": {
+              "batch_size": 32
+            },
+            "attacker_performance": {
+              "robust_accuracy": 13.7,
+              "robust_f1-score": 1,
+              "adv_example_generated_in_s": 120
+            },
+            "defenders": [
+              {
+                "nameOfDefender": "TMD",
+                "type": "preprocessor",
+                "defense_reference_link" : "https://arxiv.org/pdf/2211.02878.pdf",
+                "defense_description": "Textual Manifold-based Defense (TMD) uses low dimensional manifold. It extracts the embedding from the unseen input at the inference, and then use sampling based reconstruction method to project the extracted embedding over to the learned manifold before classification. This improves the robustness of the model against adversarial attacks. ",
+                "defense_params": {
+                },
+                "defender_performance": {
+                  "robust_accuracy": 36.8,
+                  "natural_accuracy": 95.24,
+                  "natural_f1-score": 94,
+                  "robust_f1-score": 63,
+                  "inference_elapsed_time_per_1000_in_s": 5
+                }
+              }
+            ]
+          },
+          "textfooler": {
+            "type_of_attack": "evasion",
+            "attack_reference_link": "https://ojs.aaai.org/index.php/AAAI/article/view/6311",
+            "attack_description": "The TextFooler attack is an evasion attack and works by using synonym substitution and word deletion to modify the input text in a way that fools the model. The generated adversarial examples are both semantically and syntactically similar to the original text and therefore look natural to humans and are also grammatically correct. ",
+            "attackParams": {
+              "batch_size": 32
+            },
+            "attacker_performance": {
+              "robust_accuracy": 10.5,
+              "robust_f1-score": 1,
+              "adv_example_generated_in_s": 120
+            },
+            "defenders": [
+              {
+                "nameOfDefender": "TMD",
+                "type": "preprocessor",
+                "defense_reference_link" : "https://arxiv.org/pdf/2211.02878.pdf",
+                "defense_description": "Textual Manifold-based Defense (TMD) uses low dimensional manifold. It extracts the embedding from the unseen input at the inference, and then use sampling based reconstruction method to project the extracted embedding over to the learned manifold before classification. This improves the robustness of the model against adversarial attacks. ",
+                "defense_params": {
+
+                },
+                "defender_performance": {
+                  "robust_accuracy": 40.9,
+                  "natural_accuracy": 95.24,
+                  "natural_f1-score": 94,
+                  "robust_f1-score": 63,
+                  "inference_elapsed_time_per_1000_in_s": 5
+                }
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}

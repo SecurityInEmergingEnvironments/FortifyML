@@ -1,7 +1,7 @@
 import json
 import os
+import webbrowser
 
-from kivy.app import App
 from kivy.lang import Builder
 from kivy.properties import ObjectProperty
 from kivy.uix.boxlayout import BoxLayout
@@ -14,6 +14,13 @@ from kivy.uix.popup import Popup
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.uix.spinner import Spinner
 from kivy.uix.textinput import TextInput
+from kivymd.app import MDApp
+from kivymd.uix.boxlayout import MDBoxLayout
+from kivymd.uix.button import MDFlatButton
+from kivymd.uix.expansionpanel import MDExpansionPanel, MDExpansionPanelOneLine
+from kivymd.uix.dialog import MDDialog
+from kivy.metrics import dp
+
 
 from Driver import Driver
 
@@ -39,7 +46,9 @@ TEST_SUGGESTIONS = [
 MODEL_PERFORMANCE_SUGGESTIONS = ['natural_accuracy', 'natural_precision', 'natural_recall', 'natural_f1-score',
                                  'inference_elapsed_time_per_1000_in_s']
 
-ATTACKER_PERFORMANCE_SUGGESTIONS = ['robust_accuracy', 'robust_precision', 'robust_recall', 'robust_f1-score']
+ATTACKER_PERFORMANCE_SUGGESTIONS = ['robust_accuracy', 'robust_precision', 'robust_recall', 'robust_f1-score',
+                                    'adv_example_generated_in_s_2080', 'adv_example_generated_in_s_6000',
+                                    'adv_example_generated_in_s_1080']
 
 DEFENDER_PERFORMANCE_SUGGESTIONS = ['natural_accuracy', 'natural_precision', 'natural_recall', 'natural_f1-score',
                                     'robust_accuracy', 'robust_precision', 'robust_recall', 'robust_f1-score',
@@ -142,6 +151,31 @@ def show_save_explorer(widget, hint_text):
     widget._popup.open()
     widget._popup.content.ids.text_input.focus = True
 
+def show_warning_popup():
+    content = WarningPopup()
+    popupWindow = Popup(title="Warning", content=content, size_hint=(0.7, 0.7))
+    popupWindow.open()
+
+class ExitPopup(MDDialog):
+    def __init__(self, **kwargs):
+        super(ExitPopup, self).__init__(**kwargs)
+        self.dialog = MDDialog(title="Close Application", text="Are you sure?", size_hint=(.3, None), height=dp(200),
+                               buttons=[
+                                   MDFlatButton(text="Cancel", on_release=self.dismiss_callback),
+                                   MDFlatButton(text="Confirm", on_release=self.close_app)
+                               ])
+
+        self.dialog.open()
+
+    def close_app(self, *args):
+        self.dialog.dismiss()
+        MDApp.get_running_app().stop()
+
+    def dismiss_callback(self, *args):
+        self.dialog.dismiss()
+
+class WarningPopup(FloatLayout):
+    pass
 
 class WindowManager(ScreenManager):
     pass
@@ -150,6 +184,44 @@ class WindowManager(ScreenManager):
 # FUTURE WORK: create a settings page for the UI where the user can customize the UI, including
 # changing the color of the UI (light mode, dark mode, etc.), font color, font size, default values,
 # starting number of parameters, starting number of constraints, etc.
+
+class RegularWindow(Screen):
+    def __init__(self, **kwargs):
+        super(Screen, self).__init__(**kwargs)
+        self.defenses_list = {
+            "Evasion Attacks - Fastest": "fastest",
+            "Evasion Attacks - Average": "average",
+            "Evasion Attacks - Slowest": "slowest"
+        }
+        self.hardware_list = {
+            "Nvidia RTX 1080 Ti": "1080",
+            "Nvidia RTX 2080 Ti": "2080",
+            "Nvidia RTX 6000": "6000"
+        }
+
+    # generate the output based on the options selected
+    def ui_generate_button(self, application_id, defense_id, constraints_id, hardware_id):
+        settings_filename = None
+        if application_id.lower() == 'image':
+            if constraints_id.lower() == 'time':
+                settings_filename = f"settings/{application_id.lower()}_all_dataset-settings.json"
+            elif constraints_id.lower() == 'accuracy':
+                show_warning_popup()
+
+        elif application_id.lower() == 'nlp':
+            settings_filename = f"settings/{application_id.lower()}_all_dataset_{constraints_id.lower()}-settings.json"
+
+        if settings_filename is not None:
+            driver = Driver(settingPath=settings_filename)
+            driver.drive(self.defenses_list[defense_id], self.hardware_list[hardware_id])
+
+            self.parent.ids.recommendations_window.extract_recommendations(settings_filename)
+            recommender.root.transition.direction = "left"
+            recommender.root.current = "recommendations_window"
+            return True
+
+        return False
+
 class MainWindow(Screen):
     _popup = None
 
@@ -158,7 +230,7 @@ class MainWindow(Screen):
         global _Chosen_Setting_File_Path
         if len(_Chosen_Setting_File_Path) != 0:
             driver = Driver(settingPath=_Chosen_Setting_File_Path)
-            driver.drive()
+            driver.drive(None, None)
 
             self.parent.ids.recommendations_window.extract_recommendations(_Chosen_Setting_File_Path)
 
@@ -986,6 +1058,8 @@ class AddCustomConstraints(BoxLayout):
 
             self.ids.custom_constraint_text.text = " Added '" + self.ids.custom_constraint_input.text + "'"
 
+class RecommendationsExpansion(MDBoxLayout):
+    pass
 
 class RecommendationsWindow(Screen):
     # extract the recommendations into dictionary form from the given settings file
@@ -1008,22 +1082,46 @@ class RecommendationsWindow(Screen):
         # a recommendation container has a button to expand/collapse each section as well as a label to display
         # the content
         for dataset in output_dictionary["recommendation_result"]:
-            # each level of the loop is creating a container in the given parent container with the given text
-            dataset_rc = self.add_recommendation_container(self.ids.recommendations_scrollview, " Dataset: " + dataset)
+            dataset_rc = self.add_recommendation_container(self.ids.recommendations_scrollview,
+                                                           f"Dataset : {dataset}")
 
             for model_classifier in output_dictionary["recommendation_result"][dataset]:
-                model_classifier_rc = self.add_recommendation_container(dataset_rc, "    Model Classifier: " + model_classifier)
+                classifier_panel = self.add_recommendation_container(dataset_rc,
+                                                                     f"Model Classifier : {model_classifier}")
 
                 for threat_model in output_dictionary["recommendation_result"][dataset][model_classifier]:
-                    threat_model_rc = self.add_recommendation_container(model_classifier_rc, "        Threat Model: " + threat_model)
+                    threat_panel = self.add_recommendation_container(classifier_panel,
+                                                                     f"Threat Model : {threat_model}")
 
                     for attack in output_dictionary["recommendation_result"][dataset][model_classifier][threat_model]:
-                        attack_rc = self.add_recommendation_container(threat_model_rc, "            Attacker Model: " + attack)
+                        attack_panel = MDExpansionPanel(content=RecommendationsExpansion(),
+                                                        panel_cls=MDExpansionPanelOneLine(text=f"Attack : {attack}"))
+                        attack_panel.content.ids.recommendations_reference_link.text = output_dictionary["recommendation_result"][dataset][model_classifier][threat_model][attack]["attack_reference_link"]
+                        attack_panel.content.ids.recommendations_description.text = output_dictionary["recommendation_result"][dataset][model_classifier][threat_model][attack]["attack_description"]
 
-                        solver_status = RecommendationLabel(text="                        Solver Status: " + output_dictionary["recommendation_result"][dataset][model_classifier][threat_model][attack]["solver_status"])
-                        recommended_defender = RecommendationLabel(text="                        Recommended Defender: " +output_dictionary["recommendation_result"][dataset][model_classifier][threat_model][attack]["recommendation"])
-                        attack_rc.ids.sub_layer_container.add_widget(solver_status)
-                        attack_rc.ids.sub_layer_container.add_widget(recommended_defender)
+                        defense_box = MDBoxLayout(padding=[20, 0, 0, 0], adaptive_height=True)
+                        defense_panel = MDExpansionPanel(content=RecommendationsExpansion(),
+                                                         panel_cls=MDExpansionPanelOneLine(text=f"Recommended Defender : {output_dictionary['recommendation_result'][dataset][model_classifier][threat_model][attack]['recommendation']}"))
+                        defense_panel.content.ids.recommendations_reference_link.text = output_dictionary['recommendation_result'][dataset][model_classifier][threat_model][attack]["defense_reference_link"]
+                        defense_panel.content.ids.recommendations_description.text = output_dictionary['recommendation_result'][dataset][model_classifier][threat_model][attack]["defense_description"]
+
+                        defense_box.add_widget(defense_panel)
+                        threat_panel.ids.sub_layer_container.add_widget(attack_panel)
+                        threat_panel.ids.sub_layer_container.add_widget(defense_box)
+
+        #     for model_classifier in output_dictionary["recommendation_result"][dataset]:
+        #         model_classifier_rc = self.add_recommendation_container(dataset_rc, "    Model Classifier: " + model_classifier)
+        #
+        #         for threat_model in output_dictionary["recommendation_result"][dataset][model_classifier]:
+        #             threat_model_rc = self.add_recommendation_container(model_classifier_rc, "        Threat Model: " + threat_model)
+        #
+        #             for attack in output_dictionary["recommendation_result"][dataset][model_classifier][threat_model]:
+        #                 attack_rc = self.add_recommendation_container(threat_model_rc, "            Attacker Model: " + attack)
+        #
+        #                 solver_status = RecommendationLabel(text="                        Solver Status: " + output_dictionary["recommendation_result"][dataset][model_classifier][threat_model][attack]["solver_status"])
+        #                 recommended_defender = RecommendationLabel(text="                        Recommended Defender: " +output_dictionary["recommendation_result"][dataset][model_classifier][threat_model][attack]["recommendation"])
+        #                 attack_rc.ids.sub_layer_container.add_widget(solver_status)
+        #                 attack_rc.ids.sub_layer_container.add_widget(recommended_defender)
 
     # creates a container in the given parent container with the given text and returns the created container
     def add_recommendation_container(self, parent_container, layer_label_text):
@@ -1032,6 +1130,11 @@ class RecommendationsWindow(Screen):
         parent_container.ids.sub_layer_container.add_widget(rc)
         return rc
 
+    def clear_output(self):
+        self.ids.recommendations_scrollview.ids.sub_layer_container.clear_widgets()
+
+    def stop_app(self):
+        ExitPopup()
 
 # contains an expand/collapse button, a label for the layer (dataset or model classifier or threat model etc.)
 # and contains a BoxLayout to store its nested layer (ex: dataset would store model classifiers)
@@ -1177,12 +1280,14 @@ class SaveTextInput(TextInput):
         return super().keyboard_on_key_down(window, keycode, text, modifiers)
 
 
-_kv = Builder.load_file("kivy.kv")
 
-
-class RecommenderTool(App):
+class RecommenderTool(MDApp):
     def build(self):
+        self.theme_cls.primary_palette = "Orange"
+        self.theme_cls.theme_style = "Dark"
+        self.theme_cls.primary_hue = "200"
+        _kv = Builder.load_file("kivy.kv")
         return _kv
 
-
-RecommenderTool().run()
+recommender = RecommenderTool()
+recommender.run()

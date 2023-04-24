@@ -23,7 +23,7 @@ class InputDataHandler:
   @param jsonFilePath string file path to the user's input JSON data file
   @return recommendations based on the user's input JSON data file
   """
-  def handle(self, jsonFilePath:str):
+  def handle(self, jsonFilePath:str, defenseId, hardwareId):
     recommendation_result = defaultdict()
     inputData = {}
     with open(jsonFilePath, 'r') as fp:
@@ -41,7 +41,9 @@ class InputDataHandler:
       recommendation_result = self._buildRecommendationResultPerDataset(
         recommendation_result = recommendation_result,
         datasetName = datasetName,
-        datasetValue = datasetValue
+        datasetValue = datasetValue,
+        defenseId = defenseId,
+        hardwareId = hardwareId
       )
 
     return recommendation_result
@@ -53,7 +55,7 @@ class InputDataHandler:
   @param datasetValue performance of the current classifier
   @return recommendation dictionary of a given dataset
   """
-  def _buildRecommendationResultPerDataset(self, recommendation_result, datasetName, datasetValue):
+  def _buildRecommendationResultPerDataset(self, recommendation_result, datasetName, datasetValue, defenseId, hardwareId):
     for modelName, modelValue in datasetValue.items():
       if modelName not in recommendation_result[datasetName]:
         recommendation_result[datasetName][modelName] = {}
@@ -62,7 +64,9 @@ class InputDataHandler:
         recommendation_result = recommendation_result,
         datasetName = datasetName,
         modelName = modelName,
-        modelValue = modelValue
+        modelValue = modelValue,
+        defenseId=defenseId,
+        hardwareId=hardwareId
       )
     return recommendation_result
 
@@ -74,7 +78,7 @@ class InputDataHandler:
   @param modelValue performance of the current classifier
   @return recommendation dictionary of a given classifier
   """
-  def _buildRecommendationResultGivenModel(self, recommendation_result, datasetName, modelName, modelValue):
+  def _buildRecommendationResultGivenModel(self, recommendation_result, datasetName, modelName, modelValue, defenseId, hardwareId):
     threatModelDict = {}
     for threatModel in THREAT_MODELS:
       if threatModel in modelValue:
@@ -88,7 +92,9 @@ class InputDataHandler:
           datasetName = datasetName,
           modelName = modelName,
           threatModel = threatModel,
-          threatModelData = threatModelDict[threatModel]
+          threatModelData = threatModelDict[threatModel],
+          defenseId=defenseId,
+          hardwareId=hardwareId
         )
     return recommendation_result
 
@@ -103,8 +109,25 @@ class InputDataHandler:
   @return recommendation dictionary of a given attack
   """
   def _buildRecommendationResultGivenAttack(self, threatModelData, modelValue,
-    recommendation_result, datasetName, modelName, threatModel):
-    for attackerName, attackerData in threatModelData.items():
+    recommendation_result, datasetName, modelName, threatModel, defenseId, hardwareId):
+
+    if defenseId == None or hardwareId == None:
+      threatModels = threatModelData
+    else:
+      threatModels = defaultdict()
+      # comparison to figure out defenseId and hardwareId combinations
+      sorted_attacks = sorted(threatModelData.items(),
+                              key=lambda x: x[1]['attacker_performance'][f'adv_example_generated_in_s_{hardwareId}'])
+      if defenseId == 'slowest':
+        key, value = sorted_attacks[-1]
+      elif defenseId == 'fastest':
+        key, value = sorted_attacks[0]
+      else:
+        key, value = sorted_attacks[len(sorted_attacks)//2]
+
+      threatModels[key] = value
+
+    for attackerName, attackerData in threatModels.items():
       scoreDictionary = {
         "baseline_performance": modelValue[BASELINE_PERFORMANCE],
         "attacker_performance": attackerData['attacker_performance']
@@ -115,9 +138,20 @@ class InputDataHandler:
       )
 
       recommendation, status = self._solveConstraintProblem(defenderDict = defenderDict)
+
+      recommendation_obj = None
+      for defender in attackerData['defenders']:
+        if f"Defenders_{defender['nameOfDefender']}" == recommendation:
+          recommendation_obj = defender
+          break
+
       recommendation_result[datasetName][modelName][threatModel][attackerName] = {
         "solver_status": status,
-        "recommendation": recommendation
+        "recommendation": recommendation,
+        "attack_reference_link": "" if 'attack_reference_link' not in attackerData else attackerData['attack_reference_link'],
+        "attack_description": "" if 'attack_description' not in attackerData else attackerData['attack_description'],
+        "defense_reference_link": "" if (recommendation_obj is None or 'defense_reference_link' not in recommendation_obj) else recommendation_obj['defense_reference_link'],
+        "defense_description": "" if (recommendation_obj is None or 'defense_description' not in recommendation_obj) else recommendation_obj['defense_description']
       }
       if self.show_outcome_details:
         recommendation_result[datasetName][modelName][threatModel][attackerName]["outcome_details"] = [denoiserPerformanceObeject for denoiserName, denoiserPerformanceObeject in defenderDict.items()]
@@ -127,7 +161,7 @@ class InputDataHandler:
   This private method build the defender dictionary including the defender's name and its performance
   @param defenderListForCurrentAttack list of defender names
   @param scoreDictionary a dictionary where key is name of a score and value is the score
-  @return dictionary where key is a namee of a defender and value is its performance object
+  @return dictionary where key is a name of a defender and value is its performance object
   """
   def _buildDefenderDict(self, defenderListForCurrentAttack, scoreDictionary):
     defenderDict = {}

@@ -1007,7 +1007,7 @@
         "baseline_performance": {
           "natural_f1-score": 88,
           "inference_elapsed_time_per_1000_in_s": 3.72
-      },
+        },
       "grey-box_setting": {
         "PGD": {
             "type_of_attack": "evasion",
