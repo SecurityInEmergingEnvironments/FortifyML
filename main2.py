@@ -1,6 +1,5 @@
 import json
 import os
-import webbrowser
 
 from kivy.lang import Builder
 from kivy.properties import ObjectProperty
@@ -174,7 +173,11 @@ class ExitPopup(MDDialog):
     def dismiss_callback(self, *args):
         self.dialog.dismiss()
 
+
 class WarningPopup(FloatLayout):
+    pass
+
+class InfoPopup(FloatLayout):
     pass
 
 class WindowManager(ScreenManager):
@@ -195,8 +198,7 @@ class RegularWindow(Screen):
         }
         self.hardware_list = {
             "Nvidia RTX 1080 Ti": "1080",
-            "Nvidia RTX 2080 Ti": "2080",
-            "Nvidia RTX 6000": "6000"
+            "Nvidia RTX 2080 Ti": "2080"
         }
 
     # generate the output based on the options selected
@@ -1132,6 +1134,11 @@ class RecommendationsWindow(Screen):
 
     def clear_output(self):
         self.ids.recommendations_scrollview.ids.sub_layer_container.clear_widgets()
+
+    def more_info_popup(self):
+        content = InfoPopup()
+        infoWindow = Popup(title="More Information", content=content, size_hint=(1, 0.9))
+        infoWindow.open()
 
     def stop_app(self):
         ExitPopup()

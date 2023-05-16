@@ -26,8 +26,13 @@
       },
       {
         "constraint": ">=",
-        "constraint_value": 90,
+        "constraint_value": 80,
         "metric_name": "natural_accuracy"
+      },
+      {
+        "constraint": "<=",
+        "constraint_value": 2000,
+        "metric_name": "inference_elapsed_time_per_1000_in_s"
       }
     ]
   },

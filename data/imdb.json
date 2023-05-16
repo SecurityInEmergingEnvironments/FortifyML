@@ -1,14 +1,11 @@
 {
-  "context": {
-    "GPU": "NVIDIA_RTX-6000"
-  },
   "data": {
     "imdb": {
       "bert": {
         "baseline_performance": {
-          "natural_accuracy": 92.15,
-          "natural_f1-score": 95,
-          "inference_elapsed_time_per_1000_in_s": 4.43
+          "natural_accuracy": 91.90,
+          "natural_f1-score": 89,
+          "inference_elapsed_time_per_1000_in_s": 306
         },
         "black-box_setting": {
           "pwws": {
@@ -16,40 +13,26 @@
             "attack_reference_link": "https://arxiv.org/pdf/2211.02878.pdf",
             "attack_description": "PWWS (Projected Word-Wise Salient Features) is an evasion attack that is used to generate adversarial examples for text classification models.",
             "attackParams": {
-              "batch_size": 32
             },
             "attacker_performance": {
-              "robust_accuracy": 6.5,
-              "robust_f1-score": 1,
-              "adv_example_generated_in_s": 120
+              "robust_accuracy": 0.0,
+              "robust_f1-score": 0.0,
+              "adv_example_generated_in_s_2080": 591,
+              "adv_example_generated_in_s_1080": 3066
             },
             "defenders": [
               {
                 "nameOfDefender": "TMD",
-                "type": "preprocessor",
-                "defense_reference_link" : "https://arxiv.org/pdf/2211.02878.pdf",
+                "type": "unknown",
+                "defense_reference_link": "https://arxiv.org/pdf/2211.02878.pdf",
                 "defense_description": "Textual Manifold-based Defense (TMD) uses low dimensional manifold. It extracts the embedding from the unseen input at the inference, and then use sampling based reconstruction method to project the extracted embedding over to the learned manifold before classification. This improves the robustness of the model against adversarial attacks. ",
                 "defense_params": {},
                 "defender_performance": {
-                  "natural_accuracy": 92.17,
-                  "robust_accuracy": 38.7,
-                  "natural_f1-score": 94,
-                  "robust_f1-score": 63,
-                  "inference_elapsed_time_per_1000_in_s": 5
-                }
-              },
-              {
-                "nameOfDefender": "ASCC",
-                "type": "preprocessor",
-                "defense_reference_link": "https://openreview.net/pdf?id=ks5nebunVn_",
-                "defense_description": "Adversarial Sparse Convex Combination (ASCC) model the attack space as a convex hull and uses a regularization term to enforce perturbations towards an actual substitution, thus can be used better with discrete textual space. The defense incorporates adversarial training of the generates worst case perturbations to increase the robustness. ",
-                "defense_params": {},
-                "defender_performance": {
-                  "natural_accuracy": 92.2,
-                  "robust_accuracy": 77.5,
-                  "natural_f1-score": 94,
-                  "robust_f1-score": 63,
-                  "inference_elapsed_time_per_1000_in_s": 5
+                  "natural_accuracy": 0,
+                  "robust_accuracy": 0,
+                  "natural_f1-score": 0,
+                  "robust_f1-score": 0,
+                  "inference_elapsed_time_per_1000_in_s": 56.19
                 }
               }
             ]
@@ -59,28 +42,27 @@
             "attack_reference_link": "https://ojs.aaai.org/index.php/AAAI/article/view/6311",
             "attack_description": "The TextFooler attack is an evasion attack and works by using synonym substitution and word deletion to modify the input text in a way that fools the model. The generated adversarial examples are both semantically and syntactically similar to the original text and therefore look natural to humans and are also grammatically correct. ",
             "attackParams": {
-              "batch_size": 32,
-              "robust_f1-score": 1,
-              "adv_example_generated_in_s": 120
+              "batch_size": 0
             },
             "attacker_performance": {
-              "robust_accuracy": 2.3,
+              "robust_accuracy": 1.0,
               "robust_f1-score": 1,
-              "adv_example_generated_in_s": 120
+              "adv_example_generated_in_s_2080": 302.4,
+              "adv_example_generated_in_s_1080": 2113.2
             },
             "defenders": [
               {
                 "nameOfDefender": "TMD",
-                "type": "preprocessor",
-                "defense_reference_link" : "https://arxiv.org/pdf/2211.02878.pdf",
+                "type": "unknown",
+                "defense_reference_link": "https://arxiv.org/pdf/2211.02878.pdf",
                 "defense_description": "Textual Manifold-based Defense (TMD) uses low dimensional manifold. It extracts the embedding from the unseen input at the inference, and then use sampling based reconstruction method to project the extracted embedding over to the learned manifold before classification. This improves the robustness of the model against adversarial attacks. ",
                 "defense_params": {},
                 "defender_performance": {
-                  "natural_accuracy": 92.17,
-                  "robust_accuracy": 44.2,
-                  "natural_f1-score": 94,
-                  "robust_f1-score": 63,
-                  "inference_elapsed_time_per_1000_in_s": 5
+                  "natural_accuracy": 0,
+                  "robust_accuracy": 0,
+                  "natural_f1-score": 0,
+                  "robust_f1-score": 0,
+                  "inference_elapsed_time_per_1000_in_s": 56.19
                 }
               }
             ]
@@ -89,36 +71,36 @@
       },
       "robert": {
         "baseline_performance": {
-          "natural_accuracy": 93.24,
-          "natural_f1-score": 95,
-          "inference_elapsed_time_per_1000_in_s": 4.43
+          "natural_accuracy": 94.10,
+          "natural_f1-score": 48,
+          "inference_elapsed_time_per_1000_in_s": 330
         },
-        "grey-box_setting": {
+        "black-box_setting": {
           "textfooler": {
             "type_of_attack": "evasion",
             "attack_reference_link": "https://ojs.aaai.org/index.php/AAAI/article/view/6311",
             "attack_description": "The TextFooler attack is an evasion attack and works by using synonym substitution and word deletion to modify the input text in a way that fools the model. The generated adversarial examples are both semantically and syntactically similar to the original text and therefore look natural to humans and are also grammatically correct. ",
             "attackParams": {
-              "batch_size": 32
             },
             "attacker_performance": {
-              "robust_accuracy": 1.0,
-              "robust_f1-score": 1,
-              "adv_example_generated_in_s": 120
+              "robust_accuracy": 0.0,
+              "robust_f1-score": 0.0,
+              "adv_example_generated_in_s_2080": 147,
+              "adv_example_generated_in_s_1080": 1620.6
             },
             "defenders": [
               {
                 "nameOfDefender": "TMD",
-                "type": "preprocessor",
-                "defense_reference_link" : "https://arxiv.org/pdf/2211.02878.pdf",
+                "type": "unknown",
+                "defense_reference_link": "https://arxiv.org/pdf/2211.02878.pdf",
                 "defense_description": "Textual Manifold-based Defense (TMD) uses low dimensional manifold. It extracts the embedding from the unseen input at the inference, and then use sampling based reconstruction method to project the extracted embedding over to the learned manifold before classification. This improves the robustness of the model against adversarial attacks. ",
                 "defense_params": {},
                 "defender_performance": {
-                  "natural_accuracy": 93.26,
-                  "robust_accuracy": 66.8,
-                  "natural_f1-score": 94,
-                  "robust_f1-score": 63,
-                  "inference_elapsed_time_per_1000_in_s": 5
+                  "natural_accuracy": 0,
+                  "robust_accuracy": 0,
+                  "natural_f1-score": 0,
+                  "robust_f1-score": 0,
+                  "inference_elapsed_time_per_1000_in_s": 56.19
                 }
               }
             ]
@@ -127,36 +109,36 @@
       },
       "lstm": {
         "baseline_performance": {
-          "natural_accuracy": 88.5,
-          "natural_f1-score": 95,
-          "inference_elapsed_time_per_1000_in_s": 4.43
+          "natural_accuracy": 88.30,
+          "natural_f1-score": 40,
+          "inference_elapsed_time_per_1000_in_s": 12
         },
-        "grey-box_setting": {
-          "textfooler": {
+        "black-box_setting": {
+          "genetic": {
             "type_of_attack": "evasion",
-            "attack_reference_link": "https://ojs.aaai.org/index.php/AAAI/article/view/6311",
-            "attack_description": "The TextFooler attack is an evasion attack and works by using synonym substitution and word deletion to modify the input text in a way that fools the model. The generated adversarial examples are both semantically and syntactically similar to the original text and therefore look natural to humans and are also grammatically correct. ",
+            "attack_reference_link": "https://arxiv.org/abs/1804.07998",
+            "attack_description": "The attack uses a population-based optimization algorithm to generate adversarial text that is semantically and syntactically similar to the original text. ",
             "attackParams": {
-              "batch_size": 32
             },
             "attacker_performance": {
-              "robust_accuracy": 1.0,
-              "robust_f1-score": 1,
-              "adv_example_generated_in_s": 120
+              "robust_accuracy": 5.0,
+              "robust_f1-score": 4.7,
+              "adv_example_generated_in_s_2080": 44028,
+              "adv_example_generated_in_s_1080": 44280
             },
             "defenders": [
               {
                 "nameOfDefender": "TMD",
-                "type": "preprocessor",
-                "defense_reference_link" : "https://arxiv.org/pdf/2211.02878.pdf",
+                "type": "unknown",
+                "defense_reference_link": "https://arxiv.org/pdf/2211.02878.pdf",
                 "defense_description": "Textual Manifold-based Defense (TMD) uses low dimensional manifold. It extracts the embedding from the unseen input at the inference, and then use sampling based reconstruction method to project the extracted embedding over to the learned manifold before classification. This improves the robustness of the model against adversarial attacks. ",
                 "defense_params": {},
                 "defender_performance": {
-                  "natural_accuracy": 93.26,
-                  "robust_accuracy": 66.8,
-                  "natural_f1-score": 94,
-                  "robust_f1-score": 63,
-                  "inference_elapsed_time_per_1000_in_s": 5
+                  "natural_accuracy": 0,
+                  "robust_accuracy": 0,
+                  "natural_f1-score": 0,
+                  "robust_f1-score": 0,
+                  "inference_elapsed_time_per_1000_in_s": 56.19
                 }
               }
             ]
@@ -166,26 +148,93 @@
             "attack_reference_link": "https://arxiv.org/pdf/2211.02878.pdf",
             "attack_description": "PWWS (Projected Word-Wise Salient Features) is an evasion attack that is used to generate adversarial examples for text classification models. The PWWS attack identifies the most salient words in the input text and modifies them to influence the model's prediction. The modifications are guided by a gradient-based method and are constrained to a bounded perturbation set, so that the resulting text remains semantically similar to the original text.",
             "attackParams": {
-              "batch_size": 32
             },
             "attacker_performance": {
-              "robust_accuracy": 1.0,
-              "robust_f1-score": 1,
-              "adv_example_generated_in_s": 120
+              "robust_accuracy": 0.0,
+              "robust_f1-score": 0.0,
+              "adv_example_generated_in_s_2080": 26.4,
+              "adv_example_generated_in_s_1080": 301.2
             },
             "defenders": [
               {
                 "nameOfDefender": "ASCC",
-                "type": "preprocessor",
+                "type": "unknown",
                 "defense_reference_link": "https://openreview.net/pdf?id=ks5nebunVn_",
                 "defense_description": "Adversarial Sparse Convex Combination (ASCC) model the attack space as a convex hull and uses a regularization term to enforce perturbations towards an actual substitution, thus can be used better with discrete textual space. The defense incorporates adversarial training of the generates worst case perturbations to increase the robustness. ",
                 "defense_params": {},
                 "defender_performance": {
-                  "natural_accuracy": 88.5,
-                  "robust_accuracy": 82.5,
-                  "natural_f1-score": 94,
-                  "robust_f1-score": 63,
-                  "inference_elapsed_time_per_1000_in_s": 5
+                  "natural_accuracy": 82.99,
+                  "robust_accuracy": 74.65,
+                  "natural_f1-score": 45,
+                  "robust_f1-score": 42,
+                  "inference_elapsed_time_per_1000_in_s": 460.76
+                }
+              }
+            ]
+          }
+        }
+      },
+      "cnn": {
+        "baseline_performance": {
+          "natural_accuracy": 86.30,
+          "natural_f1-score": 40,
+          "inference_elapsed_time_per_1000_in_s": 10.2
+        },
+        "black-box_setting": {
+          "genetic": {
+            "type_of_attack": "evasion",
+            "attack_reference_link": "https://arxiv.org/abs/1804.07998",
+            "attack_description": "The attack uses a population-based optimization algorithm to generate adversarial text that is semantically and syntactically similar to the original text.",
+            "attackParams": {
+            },
+            "attacker_performance": {
+              "robust_accuracy": 4.0,
+              "robust_f1-score": 3.8,
+              "adv_example_generated_in_s_2080": 41292,
+              "adv_example_generated_in_s_1080": 41688
+            },
+            "defenders": [
+              {
+                "nameOfDefender": "TMD",
+                "type": "unknown",
+                "defense_reference_link": "https://arxiv.org/pdf/2211.02878.pdf",
+                "defense_description": "Textual Manifold-based Defense (TMD) uses low dimensional manifold. It extracts the embedding from the unseen input at the inference, and then use sampling based reconstruction method to project the extracted embedding over to the learned manifold before classification. This improves the robustness of the model against adversarial attacks. ",
+                "defense_params": {},
+                "defender_performance": {
+                  "natural_accuracy": 0,
+                  "robust_accuracy": 0,
+                  "natural_f1-score": 0,
+                  "robust_f1-score": 0,
+                  "inference_elapsed_time_per_1000_in_s": 56.19
+                }
+              }
+            ]
+          },
+          "pwws": {
+            "type_of_attack": "evasion",
+            "attack_reference_link": "https://arxiv.org/pdf/2211.02878.pdf",
+            "attack_description": "PWWS (Projected Word-Wise Salient Features) is an evasion attack that is used to generate adversarial examples for text classification models. The PWWS attack identifies the most salient words in the input text and modifies them to influence the model's prediction. The modifications are guided by a gradient-based method and are constrained to a bounded perturbation set, so that the resulting text remains semantically similar to the original text.",
+            "attackParams": {
+            },
+            "attacker_performance": {
+              "robust_accuracy": 0.0,
+              "robust_f1-score": 0.0,
+              "adv_example_generated_in_s_2080": 82.2,
+              "adv_example_generated_in_s_1080": 301.2
+            },
+            "defenders": [
+              {
+                "nameOfDefender": "ASCC",
+                "type": "unknown",
+                "defense_reference_link": "https://openreview.net/pdf?id=ks5nebunVn_",
+                "defense_description": "Adversarial Sparse Convex Combination (ASCC) model the attack space as a convex hull and uses a regularization term to enforce perturbations towards an actual substitution, thus can be used better with discrete textual space. The defense incorporates adversarial training of the generates worst case perturbations to increase the robustness. ",
+                "defense_params": {},
+                "defender_performance": {
+                  "natural_accuracy": 81.67,
+                  "robust_accuracy": 74.56,
+                  "natural_f1-score": 45,
+                  "robust_f1-score": 42,
+                  "inference_elapsed_time_per_1000_in_s": 460.76
                 }
               }
             ]
