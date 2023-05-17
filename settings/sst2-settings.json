@@ -36,6 +36,6 @@
     "path": "Solvers.ConstraintHandler"
   },
   "output": {
-    "output_file_path": "outputs/sst_2_output.json"
+    "output_file_path": "sst_2_output.json"
   }
 }

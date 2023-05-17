@@ -36,6 +36,6 @@
     "path": "Solvers.ConstraintHandler"
   },
   "output": {
-    "output_file_path": "outputs/yelp_output.json"
+    "output_file_path": "yelp_output.json"
   }
 }

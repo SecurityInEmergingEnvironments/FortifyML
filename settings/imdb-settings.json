@@ -23,19 +23,14 @@
       },
       {
         "constraint": ">=",
-        "constraint_value": 60,
+        "constraint_value": 40,
         "metric_name": "natural_f1-score"
-      },
-      {
-        "constraint": "<=",
-        "constraint_value": 2000,
-        "metric_name": "inference_elapsed_time_per_1000_in_s"
       }
     ],
     "name": "PulP",
     "path": "Solvers.ConstraintHandler"
   },
   "output": {
-    "output_file_path": "outputs/imdb_output.json"
+    "output_file_path": "imdb_output.json"
   }
 }

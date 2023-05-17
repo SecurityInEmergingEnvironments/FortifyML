@@ -37,6 +37,6 @@
     ]
   },
   "output":{
-    "output_file_path": "outputs/all_dataset_nlp_accuracy.json"
+    "output_file_path": "all_dataset_nlp_accuracy.json"
   }
 }
