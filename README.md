@@ -1,5 +1,5 @@
 # FortifyML
-Machine Learning Security Recommender for Everyone. The purpose of this software is to help Machine Learning Engineers build more securiy ML systems without having to also be security experts. This recommender helps you identify security mechanisms to deploy in your systems given your attacker model, your computational performance constraints, and your classification/prediction performance constraints.
+Machine Learning Security Recommender for Everyone.  The purpose of this software is to help Machine Learning Engineers build more securiy ML systems without having to also be security experts.  This recommender helps you identify security mechanisms to deploy in your systems given your attacker model, your computational performance constraints, and your classification/prediction performance constraints.
 
 # Installation
 See requirements.txt file for dependencies.
