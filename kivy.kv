@@ -25,9 +25,18 @@ WindowManager:
     id: warning_popup
     Label:
         text: "For Image, there is no analysis performed for accuracy. \nPlease select time as a constraint. \nPlease press ESC to continue."
-        font_size: "20dp"
+        font_size: "15dp"
         size_hint: 0.6, 0.2
         pos_hint: {"x":0.2, "top":1}
+        color: color_font
+
+<HardwarePopup>:
+    id: hardware_popup
+    Label:
+        text: "For image, there is no analysis performed on accuracy. \nAdditionally, analysis was performed only using NVIDIA RTX 6000, \nnot NVIDIA RTX 1080Ti or NVIDIA RTX 2080. \n\nFor NLP, analysis was performed using NVIDIA RTX 1080 Ti \nand NVIDIA RTX 2080 Ti, but not NVIDIA RTX 6000 \n\nPlease re-evaluate your selections."
+        font_size: "15dp"
+        size_hint: 0.6, 0.2
+        pos_hint: {"x":0.2, "top":.8}
         color: color_font
 
 <InfoPopup>:

@@ -15,8 +15,8 @@
             "attackParams": {
             },
             "attacker_performance": {
-              "robust_accuracy": 0.0,
-              "robust_f1-score": 0.0,
+              "robust_accuracy": 0.001,
+              "robust_f1-score": 0.001,
               "adv_example_generated_in_s_2080": 591,
               "adv_example_generated_in_s_1080": 3066
             },
@@ -28,10 +28,10 @@
                 "defense_description": "Textual Manifold-based Defense (TMD) uses low dimensional manifold. It extracts the embedding from the unseen input at the inference, and then use sampling based reconstruction method to project the extracted embedding over to the learned manifold before classification. This improves the robustness of the model against adversarial attacks. ",
                 "defense_params": {},
                 "defender_performance": {
-                  "natural_accuracy": 0,
-                  "robust_accuracy": 0,
-                  "natural_f1-score": 0,
-                  "robust_f1-score": 0,
+                  "natural_accuracy": 91.28,
+                  "robust_accuracy": 52.91,
+                  "natural_f1-score": 47,
+                  "robust_f1-score": 91,
                   "inference_elapsed_time_per_1000_in_s": 56.19
                 }
               }
@@ -58,10 +58,10 @@
                 "defense_description": "Textual Manifold-based Defense (TMD) uses low dimensional manifold. It extracts the embedding from the unseen input at the inference, and then use sampling based reconstruction method to project the extracted embedding over to the learned manifold before classification. This improves the robustness of the model against adversarial attacks. ",
                 "defense_params": {},
                 "defender_performance": {
-                  "natural_accuracy": 0,
-                  "robust_accuracy": 0,
-                  "natural_f1-score": 0,
-                  "robust_f1-score": 0,
+                  "natural_accuracy": 91.28,
+                  "robust_accuracy": 54.07,
+                  "natural_f1-score": 47,
+                  "robust_f1-score": 91,
                   "inference_elapsed_time_per_1000_in_s": 56.19
                 }
               }
@@ -83,8 +83,8 @@
             "attackParams": {
             },
             "attacker_performance": {
-              "robust_accuracy": 0.0,
-              "robust_f1-score": 0.0,
+              "robust_accuracy": 0.001,
+              "robust_f1-score": 0.001,
               "adv_example_generated_in_s_2080": 147,
               "adv_example_generated_in_s_1080": 1620.6
             },
@@ -96,10 +96,39 @@
                 "defense_description": "Textual Manifold-based Defense (TMD) uses low dimensional manifold. It extracts the embedding from the unseen input at the inference, and then use sampling based reconstruction method to project the extracted embedding over to the learned manifold before classification. This improves the robustness of the model against adversarial attacks. ",
                 "defense_params": {},
                 "defender_performance": {
-                  "natural_accuracy": 0,
-                  "robust_accuracy": 0,
-                  "natural_f1-score": 0,
-                  "robust_f1-score": 0,
+                  "natural_accuracy": 93.6,
+                  "robust_accuracy": 55.23,
+                  "natural_f1-score": 48,
+                  "robust_f1-score": 94,
+                  "inference_elapsed_time_per_1000_in_s": 56.19
+                }
+              }
+            ]
+          },
+          "pwws": {
+            "type_of_attack": "evasion",
+            "attack_reference_link": "https://arxiv.org/pdf/2211.02878.pdf",
+            "attack_description": "PWWS (Projected Word-Wise Salient Features) is an evasion attack that is used to generate adversarial examples for text classification models.",
+            "attackParams": {
+            },
+            "attacker_performance": {
+              "robust_accuracy": 0.001,
+              "robust_f1-score": 0.001,
+              "adv_example_generated_in_s_2080": 591,
+              "adv_example_generated_in_s_1080": 3066
+            },
+            "defenders": [
+              {
+                "nameOfDefender": "TMD",
+                "type": "unknown",
+                "defense_reference_link": "https://arxiv.org/pdf/2211.02878.pdf",
+                "defense_description": "Textual Manifold-based Defense (TMD) uses low dimensional manifold. It extracts the embedding from the unseen input at the inference, and then use sampling based reconstruction method to project the extracted embedding over to the learned manifold before classification. This improves the robustness of the model against adversarial attacks. ",
+                "defense_params": {},
+                "defender_performance": {
+                  "natural_accuracy": 93.6,
+                  "robust_accuracy": 51.16,
+                  "natural_f1-score": 48,
+                  "robust_f1-score": 94,
                   "inference_elapsed_time_per_1000_in_s": 56.19
                 }
               }
@@ -128,17 +157,17 @@
             },
             "defenders": [
               {
-                "nameOfDefender": "TMD",
+                "nameOfDefender": "ASCC",
                 "type": "unknown",
-                "defense_reference_link": "https://arxiv.org/pdf/2211.02878.pdf",
-                "defense_description": "Textual Manifold-based Defense (TMD) uses low dimensional manifold. It extracts the embedding from the unseen input at the inference, and then use sampling based reconstruction method to project the extracted embedding over to the learned manifold before classification. This improves the robustness of the model against adversarial attacks. ",
+                "defense_reference_link": "https://openreview.net/pdf?id=ks5nebunVn_",
+                "defense_description": "Adversarial Sparse Convex Combination (ASCC) model the attack space as a convex hull and uses a regularization term to enforce perturbations towards an actual substitution, thus can be used better with discrete textual space. The defense incorporates adversarial training of the generates worst case perturbations to increase the robustness. ",
                 "defense_params": {},
                 "defender_performance": {
-                  "natural_accuracy": 0,
-                  "robust_accuracy": 0,
-                  "natural_f1-score": 0,
-                  "robust_f1-score": 0,
-                  "inference_elapsed_time_per_1000_in_s": 56.19
+                  "natural_accuracy": 81.67,
+                  "robust_accuracy": 74.56,
+                  "natural_f1-score": 45,
+                  "robust_f1-score": 42,
+                  "inference_elapsed_time_per_1000_in_s": 460.76
                 }
               }
             ]
@@ -150,10 +179,10 @@
             "attackParams": {
             },
             "attacker_performance": {
-              "robust_accuracy": 0.0,
-              "robust_f1-score": 0.0,
-              "adv_example_generated_in_s_2080": 26.4,
-              "adv_example_generated_in_s_1080": 301.2
+              "robust_accuracy": 0.001,
+              "robust_f1-score": 0.001,
+              "adv_example_generated_in_s_2080": 44,
+              "adv_example_generated_in_s_1080": 249
             },
             "defenders": [
               {
@@ -164,7 +193,7 @@
                 "defense_params": {},
                 "defender_performance": {
                   "natural_accuracy": 82.99,
-                  "robust_accuracy": 74.65,
+                  "robust_accuracy": 80.2,
                   "natural_f1-score": 45,
                   "robust_f1-score": 42,
                   "inference_elapsed_time_per_1000_in_s": 460.76
@@ -195,17 +224,17 @@
             },
             "defenders": [
               {
-                "nameOfDefender": "TMD",
+                "nameOfDefender": "ASCC",
                 "type": "unknown",
-                "defense_reference_link": "https://arxiv.org/pdf/2211.02878.pdf",
-                "defense_description": "Textual Manifold-based Defense (TMD) uses low dimensional manifold. It extracts the embedding from the unseen input at the inference, and then use sampling based reconstruction method to project the extracted embedding over to the learned manifold before classification. This improves the robustness of the model against adversarial attacks. ",
+                "defense_reference_link": "https://openreview.net/pdf?id=ks5nebunVn_",
+                "defense_description": "Adversarial Sparse Convex Combination (ASCC) model the attack space as a convex hull and uses a regularization term to enforce perturbations towards an actual substitution, thus can be used better with discrete textual space. The defense incorporates adversarial training of the generates worst case perturbations to increase the robustness. ",
                 "defense_params": {},
                 "defender_performance": {
-                  "natural_accuracy": 0,
-                  "robust_accuracy": 0,
-                  "natural_f1-score": 0,
-                  "robust_f1-score": 0,
-                  "inference_elapsed_time_per_1000_in_s": 56.19
+                  "natural_accuracy": 81.67,
+                  "robust_accuracy": 74.56,
+                  "natural_f1-score": 45,
+                  "robust_f1-score": 42,
+                  "inference_elapsed_time_per_1000_in_s": 460.76
                 }
               }
             ]
@@ -217,8 +246,8 @@
             "attackParams": {
             },
             "attacker_performance": {
-              "robust_accuracy": 0.0,
-              "robust_f1-score": 0.0,
+              "robust_accuracy": 0.001,
+              "robust_f1-score": 0.001,
               "adv_example_generated_in_s_2080": 82.2,
               "adv_example_generated_in_s_1080": 301.2
             },
@@ -231,7 +260,7 @@
                 "defense_params": {},
                 "defender_performance": {
                   "natural_accuracy": 81.67,
-                  "robust_accuracy": 74.56,
+                  "robust_accuracy": 76.77,
                   "natural_f1-score": 45,
                   "robust_f1-score": 42,
                   "inference_elapsed_time_per_1000_in_s": 460.76
