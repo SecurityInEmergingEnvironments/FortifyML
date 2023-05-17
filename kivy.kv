@@ -25,9 +25,27 @@ WindowManager:
     id: warning_popup
     Label:
         text: "For Image, there is no analysis performed for accuracy. \nPlease select time as a constraint. \nPlease press ESC to continue."
-        font_size: "20dp"
+        font_size: "15dp"
         size_hint: 0.6, 0.2
         pos_hint: {"x":0.2, "top":1}
+        color: color_font
+
+<HardwarePopup>:
+    id: hardware_popup
+    Label:
+        text: "For image, there is no analysis performed on accuracy. \nAdditionally, analysis was performed only using NVIDIA RTX 6000, \nnot NVIDIA RTX 1080Ti or NVIDIA RTX 2080. \n\nFor NLP, analysis was performed using NVIDIA RTX 1080 Ti \nand NVIDIA RTX 2080 Ti, but not NVIDIA RTX 6000 \n\nPlease re-evaluate your selections."
+        font_size: "15dp"
+        size_hint: 0.6, 0.2
+        pos_hint: {"x":0.2, "top":.8}
+        color: color_font
+
+<InfoPopup>:
+    id: more_info_popup
+    Label:
+        size: self.texture_size
+        text_size: root.width, None
+        pos_hint: {"x":0.005, "top":1}
+        text: "Some general recommendations to prevent adversarial attacks: \n\n1.Understand the risks: Gain an understanding of the risks posed by adversarial attacks and the types of attacks that may be possible.\n2.Data cleaning: Ensure that the training data used to train machine learning models is clean and free of malicious inputs. Outliers, noise, and other anomalies should be detected and removed.\n3.Adversarial training: Train machine learning models using adversarial training techniques. This involves generating adversarial examples during training and using them to improve the model's robustness against future attacks.\n4.Model regularization: Apply regularization techniques such as L1, L2, and dropout regularization to the machine learning model. This can help prevent overfitting and make the model more resilient to adversarial attacks.\n5.Use a pre-trained model: As a beginner, it can be challenging to build a machine learning model from scratch that is robust to adversarial attacks. Using pre-trained models that have been tested for robustness can be a good starting point.\n\nFew links of academic papers and articles for more details on securing your model: \n\n1. https://odsc.medium.com/how-to-make-your-deep-learning-process-more-secure-8714023c9877 \n2. https://aws.amazon.com/blogs/security/7-ways-to-improve-security-of-your-machine-learning-workflows/ \n3. https://learn.microsoft.com/en-us/security/engineering/threat-modeling-aiml \n4. https://www.usenix.org/system/files/sec22summer_arp.pdf"
         color: color_font
 
 <RegularWindow>:
@@ -997,15 +1015,20 @@ WindowManager:
     BoxLayout:
         Button:
             text: "Back"
-            size_hint: .5, 1
+            size_hint: .3, 1
             on_release:
                 app.root.current = "main_window"
                 app.root.transition.direction = "right"
                 self.parent.parent.parent.parent.clear_output()
 
         Button:
+            text: "More Info"
+            size_hint: .3, 1
+            on_release: self.parent.parent.parent.parent.more_info_popup()
+
+        Button:
             text: "Close"
-            size_hint: .5, 1
+            size_hint: .3, 1
             on_release: self.parent.parent.parent.parent.stop_app()
 
 

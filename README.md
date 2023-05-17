@@ -13,7 +13,22 @@ Program is started simply by running the following command in the terminal:
 
 python main2.py
 
-# Using
+# Using 
+
+The main screen consist of four dropdown lists. These dropdowns consist of:
+1. Application: Image or NLP
+2. Defense against: The speed of the attack (fastest, slowest or average)
+3. Constraints: Time or Accuracy 
+4. Hardware: Nvidia RTX 1080 Ti or Nvidia RTX 2080 Ti 
+
+Select the option from each of the dropdowns and then click on 'Generate Recommendations' to get the output.
+For more customizations use the 'Advanced Mode' and follow the guidelines in Using Advanced Mode. 
+
+<img src="Images/main_screen_fortifyml.PNG" width="75%" height="75%">
+
+# Using Advanced Mode
+Click 'Advanced Mode' on the main screen to go to Advanced Screen.
+
 Click 'Create Data Input File' or 'Create Settings File' to go to the respective page to create each type of file. See 'Creating Data Input File' and 'Create Settings File' below for more details.
 
 Click 'Choose Setting File' to select the setting file you wish to use to generate the recommendations. Then Click 'Generate Recommendations' to recieve your output at the location specified in the setting file selected, as well as the terminal.

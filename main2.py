@@ -1,6 +1,5 @@
 import json
 import os
-import webbrowser
 
 from kivy.lang import Builder
 from kivy.properties import ObjectProperty
@@ -156,6 +155,11 @@ def show_warning_popup():
     popupWindow = Popup(title="Warning", content=content, size_hint=(0.7, 0.7))
     popupWindow.open()
 
+def show_hw_warning_popup():
+    content = HardwarePopup()
+    hwpopup = Popup(title="Warning", content=content, size_hint=(0.7, 0.7))
+    hwpopup.open()
+
 class ExitPopup(MDDialog):
     def __init__(self, **kwargs):
         super(ExitPopup, self).__init__(**kwargs)
@@ -174,7 +178,14 @@ class ExitPopup(MDDialog):
     def dismiss_callback(self, *args):
         self.dialog.dismiss()
 
+
 class WarningPopup(FloatLayout):
+    pass
+
+class HardwarePopup(FloatLayout):
+    pass
+
+class InfoPopup(FloatLayout):
     pass
 
 class WindowManager(ScreenManager):
@@ -196,20 +207,23 @@ class RegularWindow(Screen):
         self.hardware_list = {
             "Nvidia RTX 1080 Ti": "1080",
             "Nvidia RTX 2080 Ti": "2080",
-            "Nvidia RTX 6000": "6000"
+            "Nvidia RTX 6000 Ti": "6000"
         }
 
     # generate the output based on the options selected
     def ui_generate_button(self, application_id, defense_id, constraints_id, hardware_id):
         settings_filename = None
         if application_id.lower() == 'image':
-            if constraints_id.lower() == 'time':
+            if constraints_id.lower() == 'time' and hardware_id.lower() == 'nvidia rtx 6000 ti':
                 settings_filename = f"settings/{application_id.lower()}_all_dataset-settings.json"
-            elif constraints_id.lower() == 'accuracy':
-                show_warning_popup()
+            else:
+                show_hw_warning_popup()
 
         elif application_id.lower() == 'nlp':
-            settings_filename = f"settings/{application_id.lower()}_all_dataset_{constraints_id.lower()}-settings.json"
+            if hardware_id.lower() == 'nvidia rtx 6000 ti':
+                show_hw_warning_popup()
+            else:
+                settings_filename = f"settings/{application_id.lower()}_all_dataset_{constraints_id.lower()}-settings.json"
 
         if settings_filename is not None:
             driver = Driver(settingPath=settings_filename)
@@ -1132,6 +1146,11 @@ class RecommendationsWindow(Screen):
 
     def clear_output(self):
         self.ids.recommendations_scrollview.ids.sub_layer_container.clear_widgets()
+
+    def more_info_popup(self):
+        content = InfoPopup()
+        infoWindow = Popup(title="More Information", content=content, size_hint=(1, 0.9))
+        infoWindow.open()
 
     def stop_app(self):
         ExitPopup()

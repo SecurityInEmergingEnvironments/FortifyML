@@ -23,7 +23,7 @@
       },
       {
         "constraint": ">=",
-        "constraint_value": 80,
+        "constraint_value": 40,
         "metric_name": "natural_f1-score"
       }
     ],
@@ -31,6 +31,6 @@
     "path": "Solvers.ConstraintHandler"
   },
   "output": {
-    "output_file_path": "outputs/imdb_output.json"
+    "output_file_path": "imdb_output.json"
   }
 }

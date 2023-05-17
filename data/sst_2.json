@@ -1,57 +1,39 @@
 {
-  "context": {
-    "GPU": "NVIDIA_RTX-6000"
-  },
   "data": {
     "sst_2": {
-      "bert": {
+      "bi-lstm": {
         "baseline_performance": {
-          "natural_accuracy": 91.9,
-          "natural_f1-score": 95,
-          "inference_elapsed_time_per_1000_in_s": 4.43
+          "natural_accuracy": 92.43,
+          "natural_f1-score": 92,
+          "inference_elapsed_time_per_1000_in_s": 254.2
         },
         "black-box_setting": {
-          "textfooler": {
+          "pruthi": {
             "type_of_attack": "evasion",
-            "attack_reference_link": "https://ojs.aaai.org/index.php/AAAI/article/view/6311",
-            "attack_description": "The TextFooler attack is an evasion attack and works by using synonym substitution and word deletion to modify the input text in a way that fools the model. The generated adversarial examples are both semantically and syntactically similar to the original text and therefore look natural to humans and are also grammatically correct. ",
+            "attack_reference_link": "https://arxiv.org/abs/1905.11268",
+            "attack_description": " The attack algorithm use four types of character-level edits to generate perturbed sentences. The edits are swap,keyboard,add and drop.",
             "attackParams": {
-              "batch_size": 32
             },
             "attacker_performance": {
-              "robust_accuracy": 80.5,
-              "robust_f1-score": 1,
-              "adv_example_generated_in_s": 120
+              "robust_accuracy": 58.6,
+              "robust_f1-score": 62,
+              "adv_example_generated_in_s_2080": 72,
+              "adv_example_generated_in_s_1080": 873.6
             },
             "defenders": [
               {
-                "nameOfDefender": "DAT",
-                "type": "preprocessor",
-                "defense_reference_link" : "https://aclanthology.org/2021.emnlp-main.115.pdf",
-                "defense_description" : "Discrete Adversarial Training (DAT) uses online augmentation for discrete attacks where adversarial examples are generated at every training step. The resulting discrete adversarial examples are used to train the model in addition to standard training examples to improve the robustness of the model. ",
+                "nameOfDefender": "Pruthi",
+                "type": "unknown",
+                "defense_reference_link": "https://arxiv.org/abs/1905.11268",
+                "defense_description": " The defense combats adversarial spelling mistakes by placing a word recognition model before a downstream classifier. They use backoff strategies to handle rare and unseen words. ",
                 "defense_params": {
                 },
                 "defender_performance": {
-                  "natural_accuracy": 91.9,
-                  "robust_accuracy": 80.5,
-                  "natural_f1-score": 94,
-                  "robust_f1-score": 63,
-                  "inference_elapsed_time_per_1000_in_s": 5
-                }
-              },
-              {
-                "nameOfDefender": "ADFAR",
-                "type": "preprocessor",
-                "defense_reference_link" : "https://aclanthology.org/2021.findings-acl.287.pdf",
-                "defense_description" : "Anomaly Detection with Frequency-Aware Randomization (ADFAR) apply randomization to all input at the inference and uses auxiliary anomaly detector on top of PrLMs to make it a multi-tasking learning procedure. This helps PrLMs in determining which input sequence is adversarial or not. Only the sequence identified as adversarial undergo randomization and therefore reducing additional computation cost and increasing the inference speed. ",
-                "defense_params": {
-                },
-                "defender_performance": {
-                  "natural_accuracy": 92.4,
-                  "robust_accuracy": 75.6,
-                  "natural_f1-score": 94,
-                  "robust_f1-score": 63,
-                  "inference_elapsed_time_per_1000_in_s": 5
+                  "natural_accuracy": 79.2,
+                  "robust_accuracy": 78.58,
+                  "natural_f1-score": 79,
+                  "robust_f1-score": 78,
+                  "inference_elapsed_time_per_1000_in_s": 33.54
                 }
               }
             ]
